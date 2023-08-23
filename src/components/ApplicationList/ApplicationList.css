@@ -1,60 +1,54 @@
-/* styles.css */
-
   
-  .container {
+ .applicationList-container h3, .applicationList-container p,.applicationList-container button {
+    font-size: 18px;
+  }
+  
+  .applicationList-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #fff;
   }
   
-  .application {
-    background-color: #f0f0f0;
-    border-radius: 10px;
+  .applicationList-application {
+    border: 1px solid #ddd;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
   }
   
-  .application h3 {
-    margin-top: 0;
-  }
-  
-  .application-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .application-info p {
+  .applicationList-application h3 {
     margin: 0;
+    color: #333;
   }
   
-  .application-info .salary {
-    color: #007bff;
+  .applicationList-application-info {
+    margin-top: 1rem 0;
   }
   
-  .application-info .date {
-    color: #999;
+  .applicationList-application-info p {
+    margin: 5px;
   }
   
-  .application-btn {
-    margin-top: 10px;
-    background-color: #b9b6ee; /* Blush color */
-    border: none;
-    color: #fff;
+  .applicationList-salary {
+    font-weight: bold;
+  }
+  
+  .applicationList-date {
+    color: #777;
+  }
+  
+  .applicationList-application-btn {
+    display: inline-block;
     padding: 8px 15px;
-    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .application-btn:hover {
-    background-color: #0a60f5; /* Lighter blush color on hover */
-  }
-  
-  /* Increase font size slightly */
-  h3, p, button {
-    font-size: 18px;
+  .applicationList-rm-application-btn:hover {
+    background-color: #0056b3;
   }
   
