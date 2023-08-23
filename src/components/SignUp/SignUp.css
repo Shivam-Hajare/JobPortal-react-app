@@ -1,0 +1,67 @@
+
+.SignUpBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .registration-form {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    width: 500px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .SignUpBody input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 10px;
+  }
+  
+  .select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .bio-group {
+    display: none;
+  }
+  
+  .recruiter:checked ~ .bio-group {
+    display: block;
+  }
+  
+  /* Increase font size slightly */
+  h2, label, input, select, button {
+    font-size: 13px;
+  }
+  

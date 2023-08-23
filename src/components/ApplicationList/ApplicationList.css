@@ -1,0 +1,60 @@
+/* styles.css */
+
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .application {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .application h3 {
+    margin-top: 0;
+  }
+  
+  .application-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .application-info p {
+    margin: 0;
+  }
+  
+  .application-info .salary {
+    color: #007bff;
+  }
+  
+  .application-info .date {
+    color: #999;
+  }
+  
+  .application-btn {
+    margin-top: 10px;
+    background-color: #b9b6ee; /* Blush color */
+    border: none;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .application-btn:hover {
+    background-color: #0a60f5; /* Lighter blush color on hover */
+  }
+  
+  /* Increase font size slightly */
+  h3, p, button {
+    font-size: 18px;
+  }
+  
