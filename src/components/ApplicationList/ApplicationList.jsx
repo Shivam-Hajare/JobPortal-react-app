@@ -22,7 +22,7 @@ const ApplicationList = () => {
       skillsForJob: [],
     },
   ]); 
-
+  
   useEffect(() => {
     fetchAppliedJobs();
   }, []);
@@ -40,6 +40,23 @@ const ApplicationList = () => {
     }
   };
 
+  const removeApplication = async (jobId) => {
+    // http://localhost:8080/jobseeker/withdraw-application/{jobId}/{jobSeekerId}     
+    const jobseekerId = 1;
+    axios.delete(`http://localhost:8080/jobseeker/withdraw-application/${jobId}/${jobseekerId}`)
+      .then(response => {
+        if(response.data === "cannot withdrawn already selected or rejected application") {
+           alert(response.data);
+        }else {
+          fetchAppliedJobs();
+        }
+
+      })
+      .catch(error => {
+        console.error('An error occurred while deleting:', error);
+      });
+  };
+  
   return (
     <div>
       <div className="applicationList-container">
@@ -58,7 +75,7 @@ const ApplicationList = () => {
               <p className="applicationList-date">Application Date: {job?.appliedDate}</p>
               <p>{job?.postedBy}</p>
             </div>
-            <button className="applicationList-rm-application-btn">Remove Application</button>
+            <button className="applicationList-rm-application-btn" onClick={()=>removeApplication(job.jobId) }>Remove Application</button>
           </div>
         ))}
 
