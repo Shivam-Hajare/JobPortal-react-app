@@ -13,6 +13,7 @@ function SearchBar({ onSearch }) {
   };
 
   return (
+    <>
     <div className="searchBar">
       <div>
         <button onClick={() => setSelectedFilter("title")}>Search by Title</button>
@@ -52,8 +53,10 @@ function SearchBar({ onSearch }) {
           </select>
         )}
       </div>
+      
       <button onClick={handleSearchButton}>Apply Filters</button>
     </div>
+    </>
   );
 }
 

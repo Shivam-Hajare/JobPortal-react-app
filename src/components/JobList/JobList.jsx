@@ -4,7 +4,7 @@ import "./JobList.css";
 import SearchBar from "../SearchBar/SearchBar";
 import searchFunction from "../../utils/searchFunction";
 
-const JobList = () => {
+const JobList = ({searchText}) => {
   const [listOfJobs, setListOfJobs] = useState([
     {
       jobId: 5,
@@ -45,6 +45,10 @@ const JobList = () => {
     fetchJobs();
   }, []);
 
+  useEffect(() => {
+    handleSearch({filterType: "text", filterValue: searchText})
+  }, [searchText]);
+
   const fetchJobs = async () => {
     try {
       const response = await axios.get(
@@ -81,10 +85,8 @@ const JobList = () => {
       filters.filterValue
     );
 
-    if (filteredData === undefined) {
+    if (filteredData === undefined || filteredData === null) {
       setFilteredJobs([]);
-    } else if (filteredData === null) {
-      alert("somthing went wrong please try again");
     } else {
       setFilteredJobs(filteredData);
     }

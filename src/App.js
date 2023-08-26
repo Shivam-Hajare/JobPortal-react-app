@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+import React , {useState} from 'react';
 import { Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
@@ -19,6 +19,10 @@ function App() {
 
   const userRole = 'jobSeeker'; // or 'recruiter'
 
+  //for home component
+  const [searchText, setSearchText] = useState("");
+
+
   return (
     <>
      {/* <Navbar/> */}
@@ -27,11 +31,11 @@ function App() {
       {/* Rest of your application content */}
     </div>
      <Routes>
-     <Route path="/" element={<Home />} />
+     <Route path="/" element={<Home  searchText={searchText} setSearchText={setSearchText} />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/postJob" element={<AddJob />} />
-      <Route path="/jobList" element={<JobList />} />
+      <Route path="/jobList" element={<JobList searchText={searchText} />} />
       <Route path="/applicationList" element={<ApplicationList />} />
       <Route path="/RecruiterappList" element={<RecruiterAppList />} />  
       <Route path="/RecruiterJobList" element={<RecruiterJobList />} />  

@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Home.css"
-const Home = () => {
+import searchFunction from '../../utils/searchFunction';
+import { useNavigate } from 'react-router-dom';
+
+const Home = ({searchText, setSearchText}) => {
+
+    const navigate = useNavigate();
+
+    const handleSearch = (textToSearch) => {
+        navigate('/jobList');           
+    }
+
   return (
+    <>
+    <div>
+        <button onClick={(e)=> handleSearch(searchText)}>Search by Title</button>
+         <input
+         type="text"
+         value={searchText}
+         onChange={(e) => setSearchText(e.target.value)}
+         placeholder="Enter to search"
+       />
+      </div>
+
     <div> <header class="banner">
     <div class="leftBannerSide">
         <h1>Find the job that fit your life</h1>
@@ -88,6 +109,7 @@ const Home = () => {
     </div>
   </div>
   </div>
+  </>
   )
 }
 

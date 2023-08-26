@@ -7,7 +7,7 @@ const searchFunction = async (type, value) => {
         return serachByTypeOfJob(value);
     }else if (searchType === "status") {
         return searchByStatus(value);
-    }else if( searchType !== "" || !isNaN(searchType)  ){
+    }else if( searchType !== "" || !isNaN(searchType || searchType === "title")  ){
         return searchByText(value);
     }else {
         alert("put valid text");
@@ -38,7 +38,6 @@ const searchFunction = async (type, value) => {
   }
 
   const searchByText = async(value) => {
-    alert("search by text => " + value);
     try {
       const jobSeekerId = 1;
       const response = await axios.get(`http://localhost:8080/jobseeker/get/title/${value}`);
