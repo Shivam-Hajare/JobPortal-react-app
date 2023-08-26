@@ -6,18 +6,13 @@
 }
 
 /* Apply some basic styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
 
-.container {
+.AddJobcontainer {
 
     max-width: 600px;
-    /* margin: 0 auto; */
-    margin-left: 350px;
-    margin-top: 50px;
+     margin: auto; 
+     margin-top: 10px;
+     width: 500px;
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
@@ -26,13 +21,13 @@ body {
     
 }
 
-h1 {
+.AddJobcontainer h1 {
     font-size: 24px;
     margin-bottom: 20px;
     text-align: center;
 }
 
-form label {
+#jobForm form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -49,7 +44,7 @@ form label {
     font-size: 13px;
 }
 
-form button {
+#jobForm form button {
     display: block;
     width: 100%;
     padding: 10px;
@@ -61,11 +56,30 @@ form button {
     cursor: pointer;
 }
 
-form button:hover {
+#jobForm form button:hover {
     background-color: #0056b3;
 }
-
-
+.multiskills,.jobDescription{
+    width: 100%;
+}
+.addskillbtn{
+    width: 100px;
+    height: 20px;
+    font-size: 10px;
+    margin-top: 5px;
+}
+.listedSkills{
+    font-size: 10px;
+}
+.listedSkills p{
+    font-size: 15px;
+}
+.addJobSumitBtn{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    width: 250px;
+}
 /* Add styles for the navigation bar */
 
 /* .logo {
@@ -100,3 +114,52 @@ form button:hover {
 }
 
  */
+
+ /* Style for the added skill tags */
+.selected-skill ,.addskillbtn{
+    display: inline-block;
+    margin: 0.2rem;
+    padding: 0.3rem 0.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for the remove skill button within the tag */
+.selected-skill .remove-skill {
+    margin-left: 0.5rem;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.addskillbtn,.addJobSumitBtn {
+    font-size: 17px;
+    padding: 0.5em 2em;
+    border: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: dodgerblue;
+    color: white;
+    border-radius: 4px;
+   }
+   
+   .addskillbtn:hover,.addJobSumitBtn:hover {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+   }
+   
+   .addskillbtn:active,.addJobSumitBtn:active {
+    transform: translate(0em, 0.2em);
+   }
+   .addskillbtn{
+    width: 100px;
+    height: 20px;
+    font-size: 10px;
+    margin-top: 5px;
+    padding: 0;
+}
+
+.skillTag{
+    margin-top: 5px;
+}

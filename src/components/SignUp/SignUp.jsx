@@ -1,46 +1,42 @@
-import React from 'react'
-import "./SignUp.css"
+import React, { useState } from 'react';
+import "./SignUp.css";
+import JobseekerSignIn from './JobseekerSignIn'; // Import your JobseekerSignIn component
+import RecruiterSignIn from './RecruiterSignIn'; // Import your RecruiterSignIn component
+
 const SignUp = () => {
+    const [selectedCategory, setSelectedCategory] = useState("jobseeker");
+
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+
     return (
-        <div> <div class="SignUpBody">
-            <div class="registration-form">
-                <form>
-                    <div class="form-group">
-                        <label for="category">Select Category:</label>
-                        <select id="category" name="category" class="select">
+        <div className="signup_container">
+            <div className="signup_form">
+                <h2 className="signup_heading">Sign Up</h2>
+                
+                    <div className="signup_form-group">
+                        <label htmlFor="signup_category">Select Category:</label>
+                        <select
+                            id="signup_category"
+                            name="signup_category"
+                            className="signup_select"
+                            value={selectedCategory}
+                            onChange={handleCategoryChange}
+                        >
                             <option value="jobseeker">Job Seeker</option>
                             <option value="recruiter">Recruiter</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required />
-                    </div>
-                    <div class="form-group bio-group">
-                        <label for="bio">Bio:</label>
-                        <input type="text" id="bio" name="bio" />
-                    </div>
-                    <div class="form-group">
-                        <label for="phoneNumber">Phone Number:</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" />
-                    </div>
-                    <button type="submit">Sign Up</button>
-                </form>
+                    {selectedCategory === "jobseeker" ? (
+                        <JobseekerSignIn />
+                    ) : (
+                        <RecruiterSignIn />
+                    )}
+                
             </div>
-        </div></div>
-    )
-}
+        </div>
+    );
+};
 
-export default SignUp
+export default SignUp;
