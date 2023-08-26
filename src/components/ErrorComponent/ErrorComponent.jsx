@@ -13,7 +13,10 @@ const ErrorComponent = () => {
 
                             <div class="col-sm-10 col-sm-offset-1 text-center">
                                 <div class="four_zero_four_bg">
-                                <h1 class="text-center">404</h1>
+                                    <h1>404 Page Not Found!!!!</h1>
+                                {/* <h1 class="text-center">{err.status}</h1> */}
+
+                        
                                     {/* <img src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" alt="" /> */}
                                 </div>
                                 <div class="contant_box_404">

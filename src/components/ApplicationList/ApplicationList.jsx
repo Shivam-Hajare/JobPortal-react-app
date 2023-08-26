@@ -1,35 +1,87 @@
-import React from 'react'
-import "./ApplicationList.css"
-const ApplicationList = () => {
-    return (
-        <div> <div class="container">
-            <h2>Your Job Applications</h2>
-            <div class="application">
-                <h3>Full Stack Developer</h3>
-                <div class="application-info">
-                    <p>Company: XYZ Tech</p>
-                    <p class="salary">Salary: $80,000/year</p>
-                </div>
-                <div class="application-info">
-                    <p>Position: Full-time</p>
-                    <p class="date">Application Date: July 15, 2023</p>
-                </div>
-                <button class="application-btn">Applied</button>
-            </div>
-            <div class="application">
-                <h3>Frontend Developer</h3>
-                <div class="application-info">
-                    <p>Company: ABC Solutions</p>
-                    <p class="salary">Salary: $70,000/year</p>
-                </div>
-                <div class="application-info">
-                    <p>Position: Part-time</p>
-                    <p class="date">Application Date: August 2, 2023</p>
-                </div>
-                <button class="application-btn">Applied</button>
-            </div>
-        </div></div>
-    )
-}
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./ApplicationList.css";
 
-export default ApplicationList
+const ApplicationList = () => {
+  const [appliedJobs, setAppliedJobs] = useState([
+    {
+      applicationId: 4,
+      jobId: 1,
+      appliedDate: "2022-10-12",
+      status: "PENDING",
+      companyName: "L&T",
+      jobTitle: "Software Engineer",
+      jobDescription:
+        "Responsible for developing and maintaining software applications.",
+      postedDate: "2023-06-25",
+      deadLineDate: "2023-07-25",
+      noOfJobPositions: 5,
+      salary: 100000,
+      jobType: "FULL_TIME",
+      postedBy: "John Doe",
+      skillsForJob: [],
+    },
+  ]); 
+  
+  useEffect(() => {
+    fetchAppliedJobs();
+  }, []);
+
+  const fetchAppliedJobs = async () => {
+    try {
+      const jobSeekerId = 1; 
+      const response = await axios.get(
+        `http://localhost:8080/jobseeker/get/applied/${jobSeekerId}`
+      );
+      setAppliedJobs(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching applied jobs:", error);
+    }
+  };
+
+  const removeApplication = async (jobId) => {
+    // http://localhost:8080/jobseeker/withdraw-application/{jobId}/{jobSeekerId}     
+    const jobseekerId = 1;
+    axios.delete(`http://localhost:8080/jobseeker/withdraw-application/${jobId}/${jobseekerId}`)
+      .then(response => {
+        if(response.data === "cannot withdrawn already selected or rejected application") {
+           alert(response.data);
+        }else {
+          fetchAppliedJobs();
+        }
+
+      })
+      .catch(error => {
+        console.error('An error occurred while deleting:', error);
+      });
+  };
+  
+  return (
+    <div>
+      <div className="applicationList-container">
+        <h2>Your Job Applications</h2>
+
+        {appliedJobs.map((job) => (
+          <div className="applicationList-application" key={job?.applicationId}>
+            <h3>{job?.jobTitle}</h3>
+            <div className="applicationList-application-info">
+              <p>Company: {job?.companyName}</p>
+              <p>{job?.jobDescription}</p>
+              <p className="applicationList-salary">Salary: {job?.salary}/year</p>
+            </div>
+            <div className="applicationList-application-info">
+              <p>Position: {job?.jobType}</p>
+              <p className="applicationList-date">Application Date: {job?.appliedDate}</p>
+              <p>{job?.postedBy}</p>
+            </div>
+            <button className="applicationList-rm-application-btn" onClick={()=>removeApplication(job.jobId) }>Remove Application</button>
+          </div>
+        ))}
+
+      </div>
+    </div>
+  );
+};
+
+export default ApplicationList;
