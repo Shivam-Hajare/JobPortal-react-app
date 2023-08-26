@@ -118,7 +118,9 @@
     align-items: center;
     justify-content: center;
 }
-
+.middleContainerTopitem h4{
+    text-decoration:none
+}
 .middleContainerTopitem img{
     width: 90px;
     margin: auto;

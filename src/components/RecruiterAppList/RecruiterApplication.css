@@ -4,11 +4,15 @@
     margin: 0 auto;
     padding: 20px;
   }
-  
+  .Rapplicationcontainer h2{
+    font-size: 25px;
+  }
   .Rapplication {
-    background-color: #f0f0f0;
+    height: 150px;
+    background-color: white;
     border-radius: 10px;
     padding: 20px;
+    margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -63,4 +67,12 @@
    color: red;/* Darker green color on hover */
    background-color: wheat;
   }
-  
+  .status-accepted {
+    color: green;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}

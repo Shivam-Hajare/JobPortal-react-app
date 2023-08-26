@@ -11,7 +11,8 @@
     background-color: #fff;
     border-radius: 5px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);   
+     margin-top: 50px;
   }
   
   .SignIn_logo {

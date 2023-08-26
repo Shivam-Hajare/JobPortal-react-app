@@ -12,6 +12,8 @@ import JobList from './components/JobList/JobList';
 import ErrorComponent from './components/ErrorComponent/ErrorComponent';
 import Navbar from './components/Navbar/Navbar';
 import RecruiterJobList from './components/RecruiterJobList/RecruiterJobList';
+import RecruiterProfile from './components/RecruiterProfile/RecruiterProfile';
+import EditRecruiterProfile from './components/EditRecruiterProfile/EditRecruiterProfile';
 function App() {
   return (
     <>
@@ -23,8 +25,10 @@ function App() {
       <Route path="/postJob" element={<AddJob />} />
       <Route path="/jobList" element={<JobList />} />
       <Route path="/applicationList" element={<ApplicationList />} />
-      <Route path="/RecruiterappList" element={<RecruiterAppList />} />  
-      <Route path="/RecruiterJobList" element={<RecruiterJobList />} />  
+      <Route path="/RecruiterappList/:jobId" element={<RecruiterAppList />} />  
+      <Route path="/RecruiterJobList" element={<RecruiterJobList />} />   
+      <Route path="/RecruiterProfile" element={<RecruiterProfile />} /> 
+      <Route path="/editRecruiterProfile" element={<EditRecruiterProfile />} />   
       <Route>
           <Route path='*' element={<ErrorComponent />} />
         </Route>

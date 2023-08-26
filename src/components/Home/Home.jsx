@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Home.css"
+import { Link } from 'react-router-dom'
 const Home = () => {
   return (
     <div> <header class="banner">
@@ -59,19 +60,26 @@ const Home = () => {
             metus effci turac fr.ng.lla lorem facilrsis.</p>
     </div>
     <div class="middleContainerBottom">
+    <Link href="/register">
         <div class="middleContainerTopitem">
             <img src="../img/profile.png" alt=""/>
             <h4>Create an Account</h4>
         </div>
+    </Link>
+    <Link href="">
         <div class="middleContainerTopitem">
             <img src="../img/search (1).png" alt=""/>
             <h4>Search Jobs</h4>
         </div>
+    </Link>
+    <Link href="/postJob">
         <div class="middleContainerTopitem">
             <img src="../img/posting.png" alt=""/>
             <h4>Post a job</h4>
         </div>
-    </div>
+    </Link>
+</div>
+
 </section>
 
 <div class="footer">
