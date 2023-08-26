@@ -9,6 +9,9 @@ const Navbar = () => {
                 <li className="navItems"><a href="/jobList">Jobs</a></li>
                 <li className="navItems"><a href="/signup">Register</a></li>
                 <li className="navItems" ><a href="/signin">Login</a></li>
+                <li className="navItems" ><a href="/jobList">JobList</a></li>
+                <li className="navItems" ><a href="/jobseekerUpdateProfile">update jobseeker profile</a></li>
+                <li className="navItems" ><a href="/jobseekerProfile">Profile</a></li>
             </ul>
         </nav></>
     )
