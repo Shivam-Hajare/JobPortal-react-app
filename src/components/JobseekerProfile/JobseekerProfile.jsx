@@ -13,11 +13,23 @@ function JobseekerProfile() {
 
       const fetchProfile = async () => {
         try {
+            const user = JSON.parse(localStorage.getItem('user'));
+            let jobseekerId = 1;  // tesing only
+            
+            if(user != null ) {
+               jobseekerId = user.jobSeekerId;
+            }else {
+                jobseekerId = null;
+                alert("profile not found")
+            }
+
+            alert(jobseekerId);
             // http://localhost:8080/jobseeker/get-profile/{jobseekerId}
-            let jobseekerId = 4;
-            const response = await axios.get(`http://localhost:8080/jobseeker/get-profile/${jobseekerId}`);
-            console.log(response.status);
-            setProfile(response.data);
+            if(jobseekerId != null) {
+                const response = await axios.get(`http://localhost:8080/jobseeker/get-profile/${jobseekerId}`);
+                console.log(response.status);
+                setProfile(response.data);
+            }
         } catch (error) {
             // if profile not found
             setProfile(null);

@@ -5,6 +5,13 @@ function SearchBar({ onSearch }) {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
 
+  let userRole = 'ROLE_JOBSEEKER'; // or 'recruiter' ROLE_JOBSEEKER , ROLE_RECRUITER 
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  if(user != null ) {
+    userRole = user.role;
+ }
+
   const handleSearchButton = () => {
     onSearch({
       filterType: selectedFilter,
@@ -39,9 +46,9 @@ function SearchBar({ onSearch }) {
           </select>
         )}
       </div>
-      <div>
+      { userRole ==="ROLE_JOBSEEKER" && (<div>  
         <button onClick={() => setSelectedFilter("status")}>Show Status</button>
-        {selectedFilter === "status" && (
+        {  selectedFilter === "status" && (
           <select
             value={selectedValue}
             onChange={(e) => setSelectedValue(e.target.value)}
@@ -52,7 +59,7 @@ function SearchBar({ onSearch }) {
             <option value="PENDING">Pending</option>
           </select>
         )}
-      </div>
+      </div>)}
       
       <button onClick={handleSearchButton}>Apply Filters</button>
     </div>
