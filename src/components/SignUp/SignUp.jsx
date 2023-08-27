@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./SignUp.css";
 import JobseekerSignIn from './JobseekerSignIn'; // Import your JobseekerSignIn component
 import RecruiterSignIn from './RecruiterSignIn'; // Import your RecruiterSignIn component
+import JobSeekerSignUp from "../JobSeekerSignUp/JobSeekerSignUp"
 
 const SignUp = () => {
     const [selectedCategory, setSelectedCategory] = useState("jobseeker");
@@ -29,7 +30,7 @@ const SignUp = () => {
                         </select>
                     </div>
                     {selectedCategory === "jobseeker" ? (
-                        <JobseekerSignIn />
+                        <JobSeekerSignUp />
                     ) : (
                         <RecruiterSignIn />
                     )}

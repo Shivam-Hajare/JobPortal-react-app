@@ -120,7 +120,11 @@ function JobseekerUpdateProfile() {
 
       
     try {
-      let jobseekerId = 4;
+      const user = JSON.parse(localStorage.getItem('user'));
+            let jobseekerId = 1;  // tesing only
+            if(user != null ) {
+               jobseekerId = user.jobSeekerId;
+            }
       const response = await axios.put(
         `http://localhost:8080/jobseeker/update-profile/${jobseekerId}`,
         profile

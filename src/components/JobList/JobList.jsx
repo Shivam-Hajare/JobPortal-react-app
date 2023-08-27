@@ -39,15 +39,22 @@ const JobList = ({searchText}) => {
     },
   ]);
 
+
+
   const [filteredJobs, setFilteredJobs] = useState([]);
 
   useEffect(() => {
-    fetchJobs();
+    if(searchText?.length > 0 ) {
+      handleSearch({filterType: "text", filterValue: searchText})
+    }else {
+      fetchJobs();
+    }
   }, []);
-
-  useEffect(() => {
-    handleSearch({filterType: "text", filterValue: searchText})
-  }, [searchText]);
+  
+  // useEffect(() => {
+  //   handleSearch({filterType: "text", filterValue: searchText})
+  // }, [searchText]);
+  
 
   const fetchJobs = async () => {
     try {

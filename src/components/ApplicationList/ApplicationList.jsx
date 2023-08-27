@@ -23,13 +23,26 @@ const ApplicationList = () => {
     },
   ]); 
   
+  const [jobSeekerId, setJobSeekerId] = useState(0);  
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    // if ( !cookies.userId) {
+      // navigate("/signin?redirect=/RecruiterProfile")       // to JobSeeker proile
+    // }else {
+      if(user != null ) {
+        setJobSeekerId(user.jobSeekerId);
+      }else {
+        setJobSeekerId(1);
+      }
+
+    // }
+
     fetchAppliedJobs();
   }, []);
 
+
   const fetchAppliedJobs = async () => {
     try {
-      const jobSeekerId = 1; 
       const response = await axios.get(
         `http://localhost:8080/jobseeker/get/applied/${jobSeekerId}`
       );
@@ -42,8 +55,7 @@ const ApplicationList = () => {
 
   const removeApplication = async (jobId) => {
     // http://localhost:8080/jobseeker/withdraw-application/{jobId}/{jobSeekerId}     
-    const jobseekerId = 1;
-    axios.delete(`http://localhost:8080/jobseeker/withdraw-application/${jobId}/${jobseekerId}`)
+    axios.delete(`http://localhost:8080/jobseeker/withdraw-application/${jobId}/${jobSeekerId}`)
       .then(response => {
         if(response.data === "cannot withdrawn already selected or rejected application") {
            alert(response.data);

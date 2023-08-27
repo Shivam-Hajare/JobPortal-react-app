@@ -28,7 +28,7 @@ const searchFunction = async (type, value) => {
 
   const searchByStatus = async(value) => {
     try {
-        const jobSeekerId = 1;
+        const jobSeekerId = getId;
         const response = await axios.get(`http://localhost:8080/jobseeker/get/${value}/${jobSeekerId}`);
         return response.data;
       } catch (error) {
@@ -39,12 +39,20 @@ const searchFunction = async (type, value) => {
 
   const searchByText = async(value) => {
     try {
-      const jobSeekerId = 1;
       const response = await axios.get(`http://localhost:8080/jobseeker/get/title/${value}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching by status:", error);
       return null;
     }
+  }
+
+  const getId = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+            let jobseekerId = 1;  // tesing only
+            if(user != null ) {
+               jobseekerId = user.jobSeekerId;
+            }
+    return  jobseekerId;      
   }
 export default searchFunction;
