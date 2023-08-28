@@ -3,15 +3,15 @@ const validateForm = (formData) => {
     const newErrors = {};
     let isValid = true;
 
-    if (!formData.email) {
+    if (!formData.email || formData.email.trim() === "") {
         newErrors.email = 'Email is required';
         isValid = false;
     }
-    if (!formData.firstName) {
+    if (!formData.firstName || formData.firstName.trim() === "") {
         newErrors.firstName = 'First name is required';
         isValid = false;
     }
-    if (!formData.lastName) {
+    if (!formData.lastName || formData.lastName.trim() === "") {
         newErrors.lastName = 'Last name is required';
         isValid = false;
     }

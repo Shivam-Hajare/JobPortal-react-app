@@ -49,7 +49,7 @@ function JobSeekerSignUp() {
         const { name, value } = event.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: value.trim(),
         }));
     };
 
@@ -67,7 +67,10 @@ function JobSeekerSignUp() {
     
         if (isValid) {
             alert('Form submitted successfully!');
-            navigate('/jobseekerUpdateProfile');
+
+            // trim all the data before sending it to backend
+            console.log(formData)
+            navigate('/signin');
         }
     };
     
