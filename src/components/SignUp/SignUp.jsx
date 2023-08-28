@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import "./SignUp.css";
-import JobseekerSignIn from './JobseekerSignIn'; // Import your JobseekerSignIn component
-import RecruiterSignIn from './RecruiterSignIn'; // Import your RecruiterSignIn component
 import JobSeekerSignUp from "../JobSeekerSignUp/JobSeekerSignUp"
+import RecruiterSignUp from './RecruiterSignUp';
 
 const SignUp = () => {
     const [selectedCategory, setSelectedCategory] = useState("jobseeker");
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
+        alert(event.target.value)
     };
 
     return (
@@ -32,7 +32,7 @@ const SignUp = () => {
                     {selectedCategory === "jobseeker" ? (
                         <JobSeekerSignUp />
                     ) : (
-                        <RecruiterSignIn />
+                        <RecruiterSignUp />
                     )}
                 
             </div>

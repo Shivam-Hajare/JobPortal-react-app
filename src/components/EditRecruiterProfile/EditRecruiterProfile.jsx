@@ -48,7 +48,7 @@ const EditRecruiterProfile = () => {
         navigate('/RecruiterProfile'); // Navigate back to the profile page
       })
       .catch(error => {
-        alert("Error updating profile: " + error);
+        alert(JSON.stringify(error.response.data) );
         console.error('Error updating profile:', error);
       });
   };

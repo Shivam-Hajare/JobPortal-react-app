@@ -15,7 +15,7 @@ const validateForm = (formData) => {
         newErrors.lastName = 'Last name is required';
         isValid = false;
     }
-    if ( formData.yearOfExperience != 0 && !formData.yearOfExperience) {
+    if ( formData.yearOfExperience != undefined && formData.yearOfExperience != 0 && !formData.yearOfExperience) {
         newErrors.yearOfExperience = 'Year of Experience is required';
         isValid = false;
     }

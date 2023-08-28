@@ -15,7 +15,7 @@ function JobSeekerNavbar() {
   return (
     <div>
          <nav className="navBar">
-             <img className="logo" src="../img/Screenshot (70).png" alt="logo" srcSet="" />
+             <img className="logo" srcSet="../img/Screenshot (70).png" alt="logo" />
              <ul className="navList">
                 <li className="navItems"><a href="/">Home</a></li>
                {/* <li className="navItems"><a href="/jobList">Jobs</a></li> */}
