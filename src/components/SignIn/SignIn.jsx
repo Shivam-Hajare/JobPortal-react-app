@@ -45,7 +45,7 @@ const SignIn = () => {
       }
     } catch (error) {
       console.error('Sign in error:', error);
-      alert('An error occurred during sign in');
+      alert(error);
     }
   };
 

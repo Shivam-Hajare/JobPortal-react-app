@@ -4,7 +4,7 @@ import "./JobList.css";
 import SearchBar from "../SearchBar/SearchBar";
 import searchFunction from "../../utils/searchFunction";
 
-const JobList = ({searchText}) => {
+const JobList = ({ searchText }) => {
   const [listOfJobs, setListOfJobs] = useState([
     {
       jobId: 5,
@@ -44,17 +44,17 @@ const JobList = ({searchText}) => {
   const [filteredJobs, setFilteredJobs] = useState([]);
 
   useEffect(() => {
-    if(searchText?.length > 0 ) {
-      handleSearch({filterType: "text", filterValue: searchText})
-    }else {
+    if (searchText?.length > 0) {
+      handleSearch({ filterType: "text", filterValue: searchText })
+    } else {
       fetchJobs();
     }
   }, []);
-  
+
   // useEffect(() => {
   //   handleSearch({filterType: "text", filterValue: searchText})
   // }, [searchText]);
-  
+
 
   const fetchJobs = async () => {
     try {
@@ -98,6 +98,12 @@ const JobList = ({searchText}) => {
       setFilteredJobs(filteredData);
     }
   };
+  let userRole = null; // or 'recruiter' ROLE_JOBSEEKER , ROLE_RECRUITER 
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user != null) {
+    userRole = user.role;
+  }
+
   return (
     <div>
       <div className="jobList-container">
@@ -123,12 +129,17 @@ const JobList = ({searchText}) => {
               <p className="jobList-date">Posted: {job.postedDate}</p>
             </div>
             <p>{job?.skillsForJob.map((skill) => skill?.name).join(", ")}</p>
-            <button
-              className="jobList-apply-btn"
-              onClick={() => applyForJob(job?.jobId)}
-            >
-              Apply
-            </button>
+
+            {userRole !== null && (
+              userRole === 'ROLE_JOBSEEKER' ? <button
+                className="jobList-apply-btn"
+                onClick={() => applyForJob(job?.jobId)}
+              >
+                Apply
+              </button> : null
+            )}
+
+
           </div>
         ))}
       </div>

@@ -16,7 +16,17 @@ const AddJob = () => {
     const [recruiterId, setRecruiterId] = useState(""); // To store recruiterId
     const [cookies, setCookies] = useCookies(["userId"]);
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
+     const [jobTitleError, setjobTitleError] = useState( {
+        jobTitle: null,
+        salary: null,
+        noOfJobPositions: null,
+        deadlineDate: null,
+        jobDescription: null,
+     }); 
     useEffect(() => {
+
+        
         if (!cookies.userId)
           navigate("/signin?redirect=/RecruiterProfile")
         }, [cookies.userId, navigate]);
@@ -65,9 +75,10 @@ const AddJob = () => {
             const skill = skills.find(skill => skill.name === skillName);
             return skill ? skill.skillId : null;
         }).filter(id => id !== null);
-
+        
+        const user =JSON.parse( localStorage.getItem('user'));
         const jobData = {
-            recruiterId: 1,
+            recruiterId: user.recruiterId,
             jobTitle: jobTitle,
             jobDescription: jobDescription,
             deadLineDate: deadlineDate,
@@ -80,7 +91,8 @@ const AddJob = () => {
         // Submit job data to the server
         axios.post("http://localhost:8080/recruiters/postJob", jobData)
             .then(response => {
-                console.log("Job data submitted successfully:", response.data);
+                
+              //  console.log("Job data submitted successfully:", response.data);
                 alert("Job data submitted successfully");
                 // Clear form fields
                 setJobTitle("");
@@ -93,7 +105,30 @@ const AddJob = () => {
                 setSelectedSkillsList([]);
             })
             .catch(error => {
-                console.error("Error submitting job data:", error);
+                // alert(JSON.stringify(error.response.data));
+                console.log("Error submitting job data:", error.response.data);
+                // setjobTitleError(error.response.data.jobTitle);
+                for (const key in jobTitleError) {
+                    if (error.response.data.hasOwnProperty(key)) {
+                        jobTitleError[key] = error.response.data[key];
+                    }
+                }
+
+                let flag = true;
+                for (const key in jobTitleError) {
+                    if (jobTitleError[key] !== null ) {
+                        alert(jobTitleError[key]);
+                        flag = false;
+                        break;
+                    }
+                }
+
+                
+                if(!flag) {
+                    for (const key in jobTitleError) {
+                        jobTitleError[key] = null;
+                    }
+                }
             });
     };
     const handleRemoveSkill = (skillToRemove) => {
