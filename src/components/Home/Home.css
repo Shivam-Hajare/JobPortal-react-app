@@ -8,9 +8,52 @@
     width: 95%;
     margin: auto;
 }
-.logo{
+
+/* Apply these styles to your HomeSearchBar.css file */
+
+.home-searchbar {
+    display: flex;
+    align-items: center;
+    background-color: #ced3d9;;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .btn-search {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .input-search {
+    flex: 1;
+    height: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+  
+  .input-search::placeholder {
+    color: #777;
+  }
+  
+  /* Adjust styles as needed */
+  
+
+  .logo {
     width: 60px;
-}
+  }
+
+
 .navList{
     display: flex;
     gap: 2rem;
@@ -175,5 +218,5 @@ body {
     .social-icons {
       margin-top: 10px;
     }
-  }
   
+}

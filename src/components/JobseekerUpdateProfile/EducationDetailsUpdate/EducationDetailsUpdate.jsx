@@ -3,7 +3,6 @@ import "./EducationDetailsUpdate.css";
 
 const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEducationalDetails, initialDetail, updateEducationDetails }) => {
 
-
   useEffect(() => {
     if (jobseekerEducation && jobseekerEducation.length > 0) {
       setEducationalDetails(jobseekerEducation);
@@ -13,7 +12,9 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
   }, [jobseekerEducation]);
 
   const handleAddDetail = () => {
-    setEducationalDetails([...educationalDetails, initialDetail]);
+    if (!educationalDetails.some(detail => areInputsEmpty(detail))) {
+      setEducationalDetails([...educationalDetails, initialDetail]);
+    }
   };
 
   const handleRemoveDetail = (index) => {
@@ -21,20 +22,45 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
     setEducationalDetails(updatedDetails);
   };
 
+  const formatDateForBackend = (date) => {
+    const [day, month, year] = date.split('-');
+    return `${year}-${month}-${day}`;
+  };
+  
+  const formatDateForFrontend = (date) => {
+    const [year, month, day] = date.split('-');
+    return `${day}-${month}-${year}`;
+  };
+  
+
   const handleInputChange = (index, field, value) => {
     const updatedDetails = [...educationalDetails];
-    updatedDetails[index][field] = value;
-    setEducationalDetails(updatedDetails);
+  if (field === 'admissionDate' || field === 'completionDate') {
+    updatedDetails[index][field] = formatDateForBackend(value.trim()); // Convert date format for backend
+  } else {
+    updatedDetails[index][field] = value.trim();
+  }
+  setEducationalDetails(updatedDetails);
+  };
+
+  const isPercentageValid = (percentage) => {
+    const numericPercentage = parseFloat(percentage);
+    return !isNaN(numericPercentage) && numericPercentage >= 0 && numericPercentage <= 100;
   };
 
   const areInputsEmpty = (detail) => {
     return Object.values(detail).every(value => value === '');
   };
 
+  const canUpdate = () => {
+    return educationalDetails.every(detail =>
+      !areInputsEmpty(detail) && isPercentageValid(detail.percentage)
+    );
+  };
 
   return (
     <>
-    {educationalDetails.length === 0 && <h1>Atleast add one educational details</h1> }
+    {educationalDetails.length === 0 && <h1>At least add one educational detail</h1> }
     <div className="educationDetailsUpdate-educational-details">
       {educationalDetails.map((detail, index) => (
         <div key={index} className="detail">
@@ -53,19 +79,20 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
             required
           />
           <input
-            type="text"
-            placeholder="Admission Date"
-            value={detail?.admissionDate}
-            onChange={(e) => handleInputChange(index, 'admissionDate', e.target.value)}
-            required
-          />
+      type="date"
+      placeholder="Admission Date"
+      value={formatDateForFrontend(detail?.admissionDate)} // Convert date format for frontend display
+      onChange={(e) => handleInputChange(index, 'admissionDate', e.target.value)}
+      required
+      style={{ appearance: 'textfield' }}
+    />
           <input
-            type="text"
-            placeholder="Completion Date"
-            value={detail?.completionDate}
-            onChange={(e) => handleInputChange(index, 'completionDate', e.target.value)}
-            required
-          />
+      type="date"
+      placeholder="Admission Date"
+      value={formatDateForFrontend(detail?.completionDate)} // Convert date format for frontend display
+      onChange={(e) => handleInputChange(index, 'completionDate', e.target.value)}
+      required
+    />
           <input
             type="number"
             placeholder="Percentage"
@@ -76,9 +103,8 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
           <button onClick={() => handleRemoveDetail(index)}>Remove</button>
         </div>
       ))}
-      <button onClick={handleAddDetail} 
-      disabled={educationalDetails.some(detail => areInputsEmpty(detail))}>Add</button>
-      <button onClick={updateEducationDetails}>Update Education details</button>
+      <button onClick={handleAddDetail} disabled={educationalDetails.some(detail => areInputsEmpty(detail))}>Add</button>
+      <button className='educationDetailsUpdate-update-btn' onClick={updateEducationDetails} disabled={!canUpdate()}>Update Education details</button>
     </div>
     </>
   );

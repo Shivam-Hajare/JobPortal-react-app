@@ -4,8 +4,10 @@ import axios from "axios";
 import UpdateSkills from "./UpdateSkills/UpdateSkills";
 import EducationDetailsUpdate from "./EducationDetailsUpdate/EducationDetailsUpdate";
 import "./EducationDetailsUpdate/EducationDetailsUpdate.css";
+import ResumeUploader from "../ResumeUploader/ResumeUploader";
 
 function JobseekerUpdateProfile() {
+  const [id, setId] = useState(0);
   const [profile, setProfile] = useState({
     jobSeekerId: 0,
     email: "",
@@ -48,7 +50,7 @@ function JobseekerUpdateProfile() {
 
   const [educationalDetails, setEducationalDetails] = useState([initialDetail]);
 
-  // for update skill component 
+  // for update skill component
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState({});
 
@@ -72,23 +74,23 @@ function JobseekerUpdateProfile() {
   const updateSkills = () => {
     // set skills and educational details
     setProfile((prevProfile) => ({
-        ...prevProfile,
-        skills: selectedSkills,
-      }));
-      console.log("skills updated ");
-      console.log(selectedSkills)
-      console.log(profile);
-  }
+      ...prevProfile,
+      skills: selectedSkills,
+    }));
+    console.log("skills updated ");
+    console.log(selectedSkills);
+    console.log(profile);
+  };
 
   const updateEducationDetails = () => {
     setProfile((prevProfile) => ({
-        ...prevProfile,
-        eduInfo: educationalDetails
-      }));
-      console.log("Education Details updated ");
-      console.log(educationalDetails);
-      console.log(profile);
-  } 
+      ...prevProfile,
+      eduInfo: educationalDetails,
+    }));
+    console.log("Education Details updated ");
+    console.log(educationalDetails);
+    console.log(profile);
+  };
   const handleProfileChange = (field, value) => {
     setProfile((prevProfile) => ({
       ...prevProfile,
@@ -118,23 +120,22 @@ function JobseekerUpdateProfile() {
       return;
     }
 
-      
     try {
-      const user = JSON.parse(localStorage.getItem('user'));
-            let jobseekerId = 1;  // tesing only
-            if(user != null ) {
-               jobseekerId = user.jobSeekerId;
-            }
+      const user = JSON.parse(localStorage.getItem("user"));
+      let jobseekerId = 1; // tesing only
+      if (user != null) {
+        jobseekerId = user.jobSeekerId;
+      }
       const response = await axios.put(
         `http://localhost:8080/jobseeker/update-profile/${jobseekerId}`,
         profile
       );
-    //   console.log("response status " + response.status);
+      //   console.log("response status " + response.status);
       alert("Profile updated successfully");
-    //   console.log("response data " + response.data);
-    console.log(profile);
-    console.log(selectedSkills);
-    console.log("educationaDetails  => ", educationalDetails);
+      //   console.log("response data " + response.data);
+      console.log(profile);
+      console.log(selectedSkills);
+      console.log("educationaDetails  => ", educationalDetails);
     } catch (error) {
       console.error("Error updating profile:***********", error);
     }
@@ -173,21 +174,20 @@ function JobseekerUpdateProfile() {
         type="number"
         placeholder="Years of Experience"
         value={profile?.yearOfExperience}
-        onChange={(e) =>{
-                console.log(e.target.value)
-                    handleProfileChange("yearOfExperience", parseInt(e.target.value))  
-
-        }
-        }
+        onChange={(e) => {
+          console.log(e.target.value);
+          handleProfileChange("yearOfExperience", parseInt(e.target.value));
+        }}
         required
       />
       <span className="error">{validationErrors.yearOfExperience}</span>
-      <UpdateSkills jobseekerSkills={profile?.skills} 
-      selectedSkills={selectedSkills}
-      setSelectedSkills={setSelectedSkills}
-      selectedSkill={selectedSkill}
-      setSelectedSkill={setSelectedSkill}
-      updateSkills={updateSkills}
+      <UpdateSkills
+        jobseekerSkills={profile?.skills}
+        selectedSkills={selectedSkills}
+        setSelectedSkills={setSelectedSkills}
+        selectedSkill={selectedSkill}
+        setSelectedSkill={setSelectedSkill}
+        updateSkills={updateSkills}
       />
       <EducationDetailsUpdate
         jobseekerEducation={profile?.eduInfo}
@@ -196,6 +196,8 @@ function JobseekerUpdateProfile() {
         initialDetail={initialDetail}
         updateEducationDetails={updateEducationDetails}
       />
+
+      <ResumeUploader />
       <button onClick={updateProfile}>Update Profile</button>
     </div>
   );

@@ -4,20 +4,24 @@ import { Link } from 'react-router-dom'
 
 import searchFunction from '../../utils/searchFunction';
 import { useNavigate } from 'react-router-dom';
+import { FaSistrix } from "react-icons/fa";
 
 const Home = ({searchText, setSearchText}) => {
 
     const navigate = useNavigate();
 
     const handleSearch = (textToSearch) => {
+        if (textToSearch.trim() === '') {
+            return;
+          }
         navigate('/jobList');           
     }
 
   return (
     <>
-    <div>
-        <button onClick={(e)=> handleSearch(searchText)}>Search by Title</button>
-         <input
+    <div className='home-searchbar'>
+        <button className='btn-search' onClick={(e)=> handleSearch(searchText)}><FaSistrix /></button>
+         <input className='input-search'
          type="text"
          value={searchText}
          onChange={(e) => setSearchText(e.target.value)}
@@ -28,7 +32,7 @@ const Home = ({searchText, setSearchText}) => {
     <div> <header class="banner">
     <div class="leftBannerSide">
         <h1>Find the job that fit your life</h1>
-        <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam et, beatae rerum omnis veritatis sunt reiciendis eaque exercitationem? Veniam, soluta officiis. Perferendis voluptatem corporis dolorum sapiente voluptates. Vero, eius voluptates!tempore aspernatur porro.</h6>
+        <h6>A job portal is an online platform connecting job seekers and employers, offering a vast array of job listings across industries. Users can create profiles, highlight their skills, and easily search for suitable positions based on location, industry, and experience. It serves as a convenient bridge between candidates and companies, streamlining the job search process.</h6>
 
     </div>
     <div class="rightBannerSide">
