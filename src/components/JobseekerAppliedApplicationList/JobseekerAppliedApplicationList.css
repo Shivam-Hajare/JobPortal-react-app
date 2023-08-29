@@ -1,0 +1,73 @@
+/* JobseekerAppliedApplicationList.css */
+
+.withdraw-button:disabled {
+    background-color: #ccc; /* Change the background color for disabled state */
+    color: #888; /* Change the text color for disabled state */
+    cursor: not-allowed; /* Change the cursor for disabled state */
+  }
+
+.jobseekerAppliedApplicationList.applied-jobs-container {
+    padding: 20px;
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .applied-jobs-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: left; /* Align the main heading to the left */
+  }
+  
+  .applied-job h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: left; /* Align subheadings to the left */
+  }
+  
+  .status-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .status-buttons button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .status-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  .applied-job {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .applied-job p {
+    margin-bottom: 5px;
+  }
+  
+  .withdraw-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .withdraw-button:hover {
+    background-color: #c82333;
+  }
+  
