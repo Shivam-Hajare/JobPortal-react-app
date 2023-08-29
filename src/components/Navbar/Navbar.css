@@ -26,3 +26,8 @@
 .navItems a:hover{
     border-bottom: solid rgb(3, 87, 9);
 }
+.navItems.active {
+    text-decoration: underline;
+    text-decoration-color: red;
+    /* Add any other styling you want for the active item */
+}

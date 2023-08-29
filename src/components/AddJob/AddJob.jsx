@@ -3,6 +3,8 @@ import axios from 'axios';
 import "./AddJob.css";
 import { useCookies } from "react-cookie"
 import { useNavigate } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
 const AddJob = () => {
     const [jobTitle, setJobTitle] = useState("");
     const [jobDescription, setJobDescription] = useState("");
@@ -93,7 +95,8 @@ const AddJob = () => {
             .then(response => {
                 
               //  console.log("Job data submitted successfully:", response.data);
-                alert("Job data submitted successfully");
+                //alert("Job data submitted successfully");
+                toast.success("Job data submitted successfully")
                 // Clear form fields
                 setJobTitle("");
                 setJobDescription("");
@@ -117,7 +120,8 @@ const AddJob = () => {
                 let flag = true;
                 for (const key in jobTitleError) {
                     if (jobTitleError[key] !== null ) {
-                        alert(jobTitleError[key]);
+                       // alert(jobTitleError[key]);
+                        toast.error(jobTitleError[key])
                         flag = false;
                         break;
                     }

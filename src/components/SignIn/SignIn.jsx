@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie"
 import axios from 'axios';
 import "./SignIn.css";
 
+import { toast } from 'react-toastify';
 const SignIn = () => {
     const [userId, setCookie] = useCookies(["userId"]);
   const navigate = useNavigate();
@@ -36,16 +37,17 @@ const SignIn = () => {
 
         setCookie("userId", user.userId);
 
-         alert('Sign in successful ');
+        // alert('Sign in successful ');
+         toast.success("Sign in successful!!!")
 
         // Redirect to the /home page
         navigate(redirect || "/")
       } else {
-        alert('Sign in unsuccessful');
+        alert('Signin unsuccessful');
       }
     } catch (error) {
-      console.error('Sign in error:', error);
-      alert(error);
+      toast.error("Wrong credentials!!!")
+     // alert(error);
     }
   };
 

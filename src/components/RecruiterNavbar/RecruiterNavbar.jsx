@@ -1,28 +1,44 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
-
-function RecruiterNavbar() {
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import "./RecruiterNavbar.css"
+function RecruiterNavbar({ onSignout }) {
 
   const navigate = useNavigate();
 
-  const  signoutHandler = () =>  {
-    alert("log out");
+  const location = useLocation();
+
+  const signoutHandler = () => {
+    // Clear user data and log out
     document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     localStorage.removeItem("user");
-    navigate('/signin');
-}
+
+    // Call the onSignout function passed from App component
+    onSignout();
+
+    // Navigate to the sign-in page
+    navigate('/signIn');
+  }
   return (
-    <><nav class="navBar">
-    <img class="logo" src="../img/Screenshot (70).png" alt="logo" srcset="" />
-    <ul class="navList">
-        <li class="navItems"><a href="/">Home</a></li>
-        <li class="navItems"><a href="/jobList">Jobs</a></li>
-        <li class="navItems" ><a href="/postJob">Add New Job</a></li>
-        <li class="navItems" ><a href="/RecruiterJobList">Posted Jobs</a></li>
-        <button onClick={signoutHandler}> <li className="navItems" ><a href="#" >Signout</a></li></button>   
-         <li class="navItems" ><a href="/RecruiterProfile">RecruiterProfile</a></li>  {/* profile name*/}
-    </ul>
-</nav></>
+    <><nav className="navBar">
+      <img className="logo" src="../img/Screenshot (70).png" alt="logo" srcset="" />
+      <ul className="navList">
+        <li className={`navItems ${location.pathname === '/' ? 'active' : ''}`}>
+          <Link to="/">Home</Link></li>
+        <li className={`navItems ${location.pathname === '/jobList' ? 'active' : ''}`}>
+          <Link to="/jobList">Jobs</Link>
+        </li>
+        <li className={`navItems ${location.pathname === '/postJob' ? 'active' : ''}`}>
+          <Link to="/postJob">Add New Job</Link></li>
+        <li className={`navItems ${location.pathname === '/RecruiterJobList' ? 'active' : ''}`}>
+          <Link to="/RecruiterJobList">Posted Jobs</Link></li>
+        <button className='navItems signout_btn' onClick={signoutHandler}>
+          <Link className='navItems signout_btn' to="/">Signout</Link>
+        </button>
+        <li className={`navItems ${location.pathname === '/RecruiterProfile' ? 'active' : ''}`}>
+          <Link to="/RecruiterProfile">RecruiterProfile</Link></li>  {/* profile name*/}
+      </ul>
+    </nav></>
   )
 }
 // RecruiterAppList
