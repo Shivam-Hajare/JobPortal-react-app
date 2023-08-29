@@ -46,7 +46,7 @@ function SearchBar({ onSearch }) {
           </select>
         )}
       </div>
-      { userRole ==="ROLE_JOBSEEKER" && (<div>  
+      {/* { userRole ==="ROLE_JOBSEEKER" && (<div>  
         <button onClick={() => setSelectedFilter("status")}>Show Status</button>
         {  selectedFilter === "status" && (
           <select
@@ -59,7 +59,7 @@ function SearchBar({ onSearch }) {
             <option value="PENDING">Pending</option>
           </select>
         )}
-      </div>)}
+      </div>)} */}
       
       <button onClick={handleSearchButton}>Apply Filters</button>
     </div>

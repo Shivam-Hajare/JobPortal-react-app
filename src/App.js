@@ -19,6 +19,7 @@ import EditRecruiterProfile from './components/EditRecruiterProfile/EditRecruite
 import JobSeekerNavbar from './components/JobSeekerNavbar/JobSeekerNavbar';
 import RecruiterNavbar from './components/RecruiterNavbar/RecruiterNavbar';
 import AdminController from './components/AdminController/AdminController';
+import JobseekerAppliedApplicationList from './components/JobseekerAppliedApplicationList/JobseekerAppliedApplicationList';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
       <Route path='/jobList' element={<JobList/>} />  
       
       <Route path='/applicationList' element={<ApplicationList/>} />  
+      <Route path='/JobseekerAppliedApplicationList' element={<JobseekerAppliedApplicationList/>} />  
 
       <Route path="/RecruiterappList/:jobId" element={<RecruiterAppList />} />  
       <Route path="/RecruiterJobList" element={<RecruiterJobList />} />   
