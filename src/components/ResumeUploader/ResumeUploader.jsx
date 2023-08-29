@@ -60,7 +60,7 @@ const ResumeUploader = () => {
         const fileArrayBuffer = await selectedFile.arrayBuffer(); // Convert File to ArrayBuffer
         const pdfData = new Uint8Array(fileArrayBuffer); // Convert ArrayBuffer to Uint8Array
   
-        const url = `http://localhost:8080/jobseeker/resumeUpload/${id}`; // Modify the URL accordingly
+        const url = `http://localhost:8080/jobseeker/new/${id}`; // Modify the URL accordingly
         
         const response = await axios.post(url, pdfData, {
           headers: {

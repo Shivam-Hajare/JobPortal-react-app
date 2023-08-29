@@ -30,6 +30,7 @@ function SearchBar({ onSearch }) {
          value={selectedValue}
          onChange={(e) => setSelectedValue(e.target.value)}
          placeholder="Enter Title"
+         className="searchBar-input"
        />
         )}
       </div>

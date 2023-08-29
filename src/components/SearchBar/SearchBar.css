@@ -8,11 +8,20 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
+  .searchBar-input{
+      height: 2rem;
+      border-color: #007bff;
+  }
+
+  .searchBar input:focus {
+    border-color: #007bff; /* Change the border color when focused */
+  }
+
   .searchBar div {
     display: flex;
     align-items: center;
   }
-  
+
   .searchBar button {
     background-color: #0073b1;
     color: #ffffff;
