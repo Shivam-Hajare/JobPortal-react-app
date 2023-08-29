@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie"
 
+import { toast } from 'react-toastify';
 const RecruiterAppList = () => {
     const [applications, setApplications] = useState([]);
     const { jobId } = useParams(); // Get the jobId from the URL parameters
@@ -42,7 +43,8 @@ const RecruiterAppList = () => {
         })
         .catch(error => {
             console.error("Error fetching resume file:", error);
-            alert("Resume Not Found!!!");
+            //alert("Resume Not Found!!!");
+            toast.error("Resume Not Found!!!")
         });
     };
 
@@ -67,7 +69,8 @@ const RecruiterAppList = () => {
         })
         .catch(error => {
             console.error("Error updating application status:", error);
-            alert("Error updating application status");
+           // alert("Error updating application status");
+            toast.error("Error updating application status")
         });
     };
 

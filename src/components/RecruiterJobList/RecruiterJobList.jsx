@@ -32,7 +32,10 @@ const RecruiterJobList = () => {
   return (
     <div>
       <div className="postedJobList">
-        {jobs.map((job, index) => (
+      {jobs.length === 0 ? (
+          <h2>No jobs posted</h2>
+        ) : (
+        jobs.map((job, index) => (
           <div className="jobPosting" key={index}>
             <div className="jobTitle">{job.jobTitle}</div>
             <div className="jobDescription">Job Description: {job.jobDescription}</div>
@@ -47,10 +50,10 @@ const RecruiterJobList = () => {
 
             </div>
           </div>
-        ))}
+        )))}
       </div>
     </div>
   );
-}
+        }
 
 export default RecruiterJobList;

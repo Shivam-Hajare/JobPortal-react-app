@@ -3,8 +3,13 @@ import axios from "axios";
 import "./JobList.css";
 import SearchBar from "../SearchBar/SearchBar";
 import searchFunction from "../../utils/searchFunction";
+import { useLocation } from 'react-router-dom';
 
-const JobList = ({ searchText }) => {
+const JobList = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchText = queryParams.get('search') || '';
+
   const [listOfJobs, setListOfJobs] = useState([
     {
       jobId: 5,
