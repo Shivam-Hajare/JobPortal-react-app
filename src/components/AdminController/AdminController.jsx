@@ -49,7 +49,7 @@ const AdminController = () => {
 
   const handleJobSeekerClick = () => {
     fetchJobSeekers();
-    alert("jobseeker show")
+   // alert("jobseeker show")
     setShowRecruiters(false);
   };
 

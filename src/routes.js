@@ -46,7 +46,7 @@ const appRouter = createBrowserRouter([
                 element: <ApplicationList />
             },
             {
-                path: "/RecruiterAppList",
+                path: "/RecruiterappList/:jobId",
                 element: <RecruiterAppList />
             },
             {
