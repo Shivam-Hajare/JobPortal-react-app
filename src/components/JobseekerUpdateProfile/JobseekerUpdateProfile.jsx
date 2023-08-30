@@ -142,7 +142,16 @@ function JobseekerUpdateProfile() {
        );
      
     } catch (error) {
-      console.error("Error updating profile:***********", error);
+      if(error.response.data.hasOwnProperty("yearOfExperience")) {
+        alert( error.response.data.yearOfExperience);
+        return;
+      }
+   
+      if(error.response.hasOwnProperty("data")) {
+        alert(error.response.data);
+        // return;
+      }
+      alert("this is working");
     }
 
     await fetchProfile();
