@@ -9,6 +9,15 @@
     margin: auto;
 }
 
+.home-search-text {
+    text-decoration: none; 
+    color: #333; 
+    font-weight: bold; 
+}
+
+.home-search-text a:hover {
+  color: #ff9900;
+}
 /* Apply these styles to your HomeSearchBar.css file */
 
 .home-searchbar {
