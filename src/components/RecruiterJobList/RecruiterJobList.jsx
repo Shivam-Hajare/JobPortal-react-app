@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import "./RecruiterJobList.css";
 
+import { toast } from 'react-toastify';
 import { useCookies } from "react-cookie"
 const RecruiterJobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -28,6 +29,25 @@ const RecruiterJobList = () => {
     // Redirect to the RecruiterAppList page with the jobId in the URL
     navigate(`/RecruiterappList/${jobId}`);
   };
+  const handleDeleteClick = (jobId) => {
+    const recruiterId = user.recruiterId;
+    
+    axios.delete(`http://localhost:8080/recruiters/${recruiterId}/jobs/${jobId}`)
+      .then(response => {
+        toast.warning("Job deleted successfully!!!")
+        // Fetch updated job data
+        axios.get(`http://localhost:8080/recruiters/AllJobsPosted/${user.recruiterId}`)
+          .then(response => {
+            setJobs(response.data);
+          })
+          .catch(error => {
+            console.error("Error fetching job data:", error);
+          });
+      })
+      .catch(error => {
+        console.error("Error deleting job:", error);
+      });
+  };
 
   return (
     <div>
@@ -37,6 +57,7 @@ const RecruiterJobList = () => {
         ) : (
         jobs.map((job, index) => (
           <div className="jobPosting" key={index}>
+              <button className="Delete-button" onClick={() => handleDeleteClick(job.jobId)}>Delete</button>
             <div className="jobTitle">{job.jobTitle}</div>
             <div className="jobDescription">Job Description: {job.jobDescription}</div>
             <div className="jobDates">Posted: {job.postedDate} | Deadline: {job.deadLineDate}</div>
