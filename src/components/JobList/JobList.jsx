@@ -47,6 +47,7 @@ const JobList = () => {
   const [filteredJobs, setFilteredJobs] = useState([]);
 
   useEffect(() => {
+    console.log(searchText);
     if (searchText?.length > 0) {
       handleSearch({ filterType: "text", filterValue: searchText });
     } else {

@@ -53,30 +53,45 @@ const [searchText, setSearchText] = useState("");
                         <div class="firstRow">
                             <div class="browserIntem">
                                 <img src="../img/responsive.png" alt="" />
+                                <Link className='home-search-text' to={"/jobList?search=Web Design"}>
                                 <span><b >Web Design</b></span>
+                                </Link>
+                                
                             </div>
                             <div class="browserIntem">
                                 <img src="../img/illustration.png" alt="" />
+                                <Link className='home-search-text' to={"/jobList?search=Graphic design"}> 
                                 <span><b >Graphic design</b></span>
+                                </Link>
                             </div>
                             <div class="browserIntem">
                                 <img src="../img/web-development.png" alt="" />
+                                <Link className='home-search-text' to={"/jobList?search=web"}>
                                 <span><b>Web Development</b></span>
+                                </Link>
+
                             </div>
                         </div>
                         <div class="secondRow">
                             <div class="browserIntem">
                                 <img src="../img/hiring.png" alt="" />
+                                <Link className='home-search-text' to={"/jobList?search=human"}>
                                 <span><b >Human Resource</b></span>
+                                </Link>
                             </div>
 
                             <div class="browserIntem">
                                 <img src="../img/technical-support.png" alt="" />
+                                <Link className='home-search-text' to={"/jobList?search=support"}>
+
                                 <span><b >Support</b></span>
+                                </Link>
                             </div>
                             <div class="browserIntem">
                                 <img src="../img/desktop.png" alt="" />
+                                <Link className='home-search-text' to={"/jobList?search=andriod"}>
                                 <span><b >Android Development</b></span>
+                                </Link>
                             </div>
 
                         </div>
