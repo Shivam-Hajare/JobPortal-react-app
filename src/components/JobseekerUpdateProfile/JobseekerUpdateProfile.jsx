@@ -48,6 +48,14 @@ function JobseekerUpdateProfile() {
     percentage: 0,
   };
 
+  // function convertDateFormat(date) {
+  //   console.log(date);
+  //   const [day, month, year] = date.split('-');
+  //   const newDate = new Date(`${year}-${month}-${day}`);
+  //   return newDate.toISOString().split('T')[0];
+  // }
+
+
   const [educationalDetails, setEducationalDetails] = useState([initialDetail]);
 
   // for update skill component
@@ -60,7 +68,11 @@ function JobseekerUpdateProfile() {
 
   const fetchProfile = async () => {
     try {
-      let jobseekerId = 4;
+      const user = JSON.parse(localStorage.getItem("user"));
+      let jobseekerId = null; // tesing only
+      if (user != null) {
+        jobseekerId = user.jobSeekerId;
+      }
       const response = await axios.get(
         `http://localhost:8080/jobseeker/get-profile/${jobseekerId}`
       );
@@ -77,9 +89,6 @@ function JobseekerUpdateProfile() {
       ...prevProfile,
       skills: selectedSkills,
     }));
-    console.log("skills updated ");
-    console.log(selectedSkills);
-    console.log(profile);
   };
 
   const updateEducationDetails = () => {
@@ -87,11 +96,9 @@ function JobseekerUpdateProfile() {
       ...prevProfile,
       eduInfo: educationalDetails,
     }));
-    console.log("Education Details updated ");
-    console.log(educationalDetails);
-    console.log(profile);
   };
   const handleProfileChange = (field, value) => {
+
     setProfile((prevProfile) => ({
       ...prevProfile,
       [field]: value,
@@ -122,20 +129,18 @@ function JobseekerUpdateProfile() {
 
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      let jobseekerId = 1; // tesing only
+      let jobseekerId = null; // tesing only
       if (user != null) {
         jobseekerId = user.jobSeekerId;
       }
-      const response = await axios.put(
-        `http://localhost:8080/jobseeker/update-profile/${jobseekerId}`,
-        profile
-      );
-      //   console.log("response status " + response.status);
-      alert("Profile updated successfully");
-      //   console.log("response data " + response.data);
-      console.log(profile);
-      console.log(selectedSkills);
-      console.log("educationaDetails  => ", educationalDetails);
+
+     console.log(jobseekerId)
+     console.log(profile);
+       const response = await axios.put(
+         `http://localhost:8080/jobseeker/update-profile/${jobseekerId}`,
+         profile
+       );
+     
     } catch (error) {
       console.error("Error updating profile:***********", error);
     }
@@ -152,6 +157,7 @@ function JobseekerUpdateProfile() {
         value={profile?.email}
         onChange={(e) => handleProfileChange("email", e.target.value)}
         required
+        readOnly
       />
       <span className="error">{validationErrors.email}</span>
       <input

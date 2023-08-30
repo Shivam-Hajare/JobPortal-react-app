@@ -3,6 +3,7 @@ import "./EducationDetailsUpdate.css";
 
 const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEducationalDetails, initialDetail, updateEducationDetails }) => {
 
+  
   useEffect(() => {
     if (jobseekerEducation && jobseekerEducation.length > 0) {
       setEducationalDetails(jobseekerEducation);
@@ -22,21 +23,10 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
     setEducationalDetails(updatedDetails);
   };
 
-  const formatDateForBackend = (date) => {
-    const [day, month, year] = date.split('-');
-    return `${year}-${month}-${day}`;
-  };
-  
-  const formatDateForFrontend = (date) => {
-    const [year, month, day] = date.split('-');
-    return `${day}-${month}-${year}`;
-  };
-  
-
   const handleInputChange = (index, field, value) => {
     const updatedDetails = [...educationalDetails];
   if (field === 'admissionDate' || field === 'completionDate') {
-    updatedDetails[index][field] = formatDateForBackend(value.trim()); // Convert date format for backend
+    updatedDetails[index][field] = value.trim(); // Convert date format for backend
   } else {
     updatedDetails[index][field] = value.trim();
   }
@@ -81,7 +71,7 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
           <input
       type="date"
       placeholder="Admission Date"
-      value={formatDateForFrontend(detail?.admissionDate)} // Convert date format for frontend display
+      value={detail?.admissionDate} // Convert date format for frontend display
       onChange={(e) => handleInputChange(index, 'admissionDate', e.target.value)}
       required
       style={{ appearance: 'textfield' }}
@@ -89,7 +79,7 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
           <input
       type="date"
       placeholder="Admission Date"
-      value={formatDateForFrontend(detail?.completionDate)} // Convert date format for frontend display
+      value={detail?.completionDate} // Convert date format for frontend display
       onChange={(e) => handleInputChange(index, 'completionDate', e.target.value)}
       required
     />
@@ -106,6 +96,7 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
       <button onClick={handleAddDetail} disabled={educationalDetails.some(detail => areInputsEmpty(detail))}>Add</button>
       <button className='educationDetailsUpdate-update-btn' onClick={updateEducationDetails} disabled={!canUpdate()}>Update Education details</button>
     </div>
+
     </>
   );
 };

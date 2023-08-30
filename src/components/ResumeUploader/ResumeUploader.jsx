@@ -5,9 +5,12 @@ import axios from "axios";
 const ResumeUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [id, setId] = useState(0);
+
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+    // const file = e.target.files[0];
+    // console.log("file is set");
+    // setSelectedFile(file);
+    alert("change is done")
   };
 
   useEffect(() => {
@@ -31,24 +34,56 @@ const ResumeUploader = () => {
       });
   };
 
+  // const uploadResume = async () => {
+  //   console.log("inside");
+  //   if (selectedFile) {
+  //     const url =`http://localhost:8080/jobseeker/new/${id}`;
+  //     //  `http://localhost:8080/jobseeker/upload/resume/${id}`;
+  //     axios
+  //       .post(url)
+  //       .then((response) => {
+  //         alert(response.data);
+  //       })
+  //       .catch((error) => {
+  //         alert("There was a problem with the GET request:", error);
+  //       });
+  //     setSelectedFile(null);
+  //   }else {
+  //     console.log("inside else part");
+  //   }
+  // };
+
   const uploadResume = async () => {
+    console.log("upload resume 1")
     if (selectedFile) {
-      const url = `http://localhost:8080/jobseeker/upload/resume/${id}`;
-      axios
-        .get(url)
-        .then((response) => {
-          alert(response.data);
-        })
-        .catch((error) => {
-          alert("There was a problem with the GET request:", error);
+      try {
+        const fileArrayBuffer = await selectedFile.arrayBuffer(); // Convert File to ArrayBuffer
+        const pdfData = new Uint8Array(fileArrayBuffer); // Convert ArrayBuffer to Uint8Array
+  
+        const url = `http://localhost:8080/jobseeker/new/${id}`; // Modify the URL accordingly
+        
+        const response = await axios.post(url, pdfData, {
+          headers: {
+            'Content-Type': 'application/octet-stream' // Set appropriate content type
+          }
         });
-      setSelectedFile(null);
+  
+        alert("resume updated succefully");
+        setSelectedFile(null);
+      } catch (error) {
+        alert("There was a problem with the POST request:", error);
+      }
+    } else {
+      console.log("No file selected.");
     }
+
+    setSelectedFile(null);
   };
+
 
   return (
     <div className="resume-uploader">
-      <input type="file" accept=".pdf" onChange={handleFileChange} />
+      <input type="file" accept=".pdf" onInput={handleFileChange} />
       <div className="buttons">
         <button className="update-button" onClick={uploadResume}>
           Update Resume

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './JobSeekersSignUp.css';
 import { useNavigate } from 'react-router-dom';
 import validateForm from '../../utils/jobseekerSignUpValidation';
+import axios from "axios";
 
 function JobSeekerSignUp() {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function JobSeekerSignUp() {
         firstName: '',
         lastName: '',
         yearOfExperience: 0,
+        password:''
     });
 
     const [errors, setErrors] = useState({});
@@ -33,8 +35,12 @@ function JobSeekerSignUp() {
                 newErrors.lastName = 'Last name is required';
                 isValid = false;
             }
-            if (!formData.yearOfExperience) {
+            if (!formData?.yearOfExperience) {
                 newErrors.yearOfExperience = 'yearOfExperience is Required';
+                isValid = false;
+            }
+            if (!formData?.password) {
+                newErrors.password = 'password is Required';
                 isValid = false;
             }
             
@@ -66,13 +72,25 @@ function JobSeekerSignUp() {
         setErrors(newErrors);
     
         if (isValid) {
-            alert('Form submitted successfully!');
-
-            // trim all the data before sending it to backend
-            console.log(formData)
+            
+            submitProfile()
             navigate('/signin');
         }
     };
+
+    const submitProfile = async ()=> {
+
+        try {
+            const response = await axios.post(
+                `http://localhost:8080/signup/jobseeker/newRegistration`,
+                formData
+                );
+                console.log(response); 
+            }catch(error) {
+                console.log(error);
+            }
+            alert('Form submitted successfully!');
+    }
     
 
     return (
@@ -84,40 +102,51 @@ function JobSeekerSignUp() {
                     <input
                         type="email"
                         name="email"
-                        value={formData.email}
+                        value={formData?.email}
                         onChange={handleInputChange}
                     />
-                    {isFormValid && errors.email && <span className="error-message">{errors.email}</span>}
+                    {isFormValid && errors?.email && <span className="error-message">{errors?.email}</span>}
                 </div>
                 <div>
                     <label>First Name:</label>
                     <input
                         type="text"
                         name="firstName"
-                        value={formData.firstName}
+                        value={formData?.firstName}
                         onChange={handleInputChange}
                     />
-                    {isFormValid && errors.firstName && <span className="error-message">{errors.firstName}</span>}
+                    {isFormValid && errors?.firstName && <span className="error-message">{errors?.firstName}</span>}
                 </div>
                 <div>
                     <label>Last Name:</label>
                     <input
                         type="text"
                         name="lastName"
-                        value={formData.lastName}
+                        value={formData?.lastName}
                         onChange={handleInputChange}
                     />
-                    {isFormValid && errors.lastName && <span className="error-message">{errors.lastName}</span>}
+                    {isFormValid && errors?.lastName && <span className="error-message">{errors?.lastName}</span>}
                 </div>
                 <div>
                     <label>Year of Experience:</label>
                     <input
                         type="number"
                         name="yearOfExperience"
-                        value={formData.yearOfExperience}
+                        value={formData?.yearOfExperience}
                         onChange={handleInputChange}
                     />
-                    {isFormValid && errors.yearOfExperience && <span className="error-message">{errors.yearOfExperience}</span>}
+                    {isFormValid && errors?.yearOfExperience && <span className="error-message">{errors?.yearOfExperience}</span>}
+               
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input
+                        type="text"
+                        name="password"
+                        value={formData?.password}
+                        onChange={handleInputChange}
+                    />
+                    {isFormValid && errors?.password && <span className="error-message">{errors?.password}</span>}
                
                 </div>
                 <button type="submit">Sign Up</button>

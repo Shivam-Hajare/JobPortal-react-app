@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Admin.css";
+import AdminJobseeker from '../AdminJobseekerList/AdminJobseeker';
 
 const AdminController = () => {
   const [recruiters, setRecruiters] = useState([]);
   const [showRecruiters, setShowRecruiters] = useState(false);
+
+  const [JobSeekers, setJobseekers] = useState([]);
+  const [showJobseekers, setShowJobseekers] = useState(false);
 
   const fetchRecruiters = () => {
     axios.get(`http://localhost:8080/admin/get/all/recruiter`)
@@ -32,6 +36,34 @@ const AdminController = () => {
       });
   };
 
+  const fetchJobSeekers = () => {
+    axios.get(`http://localhost:8080/admin/get/all/jobseeker`)
+      .then(response => {
+        setJobseekers(response.data);
+        setShowJobseekers(true);
+      })
+      .catch(error => {
+        console.error('Error fetching job seekers:', error);
+      });
+  };
+
+  const handleJobSeekerClick = () => {
+    fetchJobSeekers();
+    alert("jobseeker show")
+    setShowRecruiters(false);
+  };
+
+  const handleDeleteJobSeeker = (jobSeekerId) => {
+    alert("delet wit id " + jobSeekerId)
+    axios.delete(`http://localhost:8080/admin/remove-jobseeker-profile/${jobSeekerId}`)
+      .then(() => {
+        fetchJobSeekers(); // Refresh the list after deletion
+      })
+      .catch(error => {
+        console.error('Error deleting job seeker:', error);
+      });
+  };
+
   useEffect(() => {
     fetchRecruiters();
   }, []);
@@ -43,8 +75,14 @@ const AdminController = () => {
       </div>
 
       <div className="optionsAdmin">
-        <div className="optionAdmin" onClick={handleRecruiterClick}>JobSeeker</div>
-        <div className="optionAdmin">Recruiter</div>
+          <button className="optionAdmin" onClick={handleJobSeekerClick}>
+          JobSeeker
+          </button>
+
+          <button className="optionAdmin" onClick={handleRecruiterClick}>
+            Recruiter
+            </button>
+            
       </div>
       
       {showRecruiters && (
@@ -80,6 +118,8 @@ const AdminController = () => {
           </table>
         </div>
       )}
+
+      {!showRecruiters && (<AdminJobseeker handleDeleteJobSeeker={handleDeleteJobSeeker} JobSeekers={JobSeekers} />)}
     </>
   );
 };
