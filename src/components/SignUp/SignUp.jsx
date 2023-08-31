@@ -8,7 +8,7 @@ const SignUp = () => {
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
-        alert(event.target.value)
+     
     };
 
     return (

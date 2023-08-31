@@ -26,6 +26,7 @@ const [searchText, setSearchText] = useState("");
                 </button>
                 <input
                     className='input-search'
+                    id='search-bar-section'
                     type='text'
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
@@ -35,8 +36,8 @@ const [searchText, setSearchText] = useState("");
 
             <div> <header class="banner">
                 <div class="leftBannerSide">
-                    <h1>Find the job that fit your life</h1>
-                    <h6>A job portal is an online platform connecting job seekers and employers, offering a vast array of job listings across industries. Users can create profiles, highlight their skills, and easily search for suitable positions based on location, industry, and experience. It serves as a convenient bridge between candidates and companies, streamlining the job search process.</h6>
+                    <h1>Find the job that fit your life</h1><br />
+                    <i>"A job portal is an online platform connecting job seekers and employers, offering a vast array of job listings across industries."</i>
 
                 </div>
                 <div class="rightBannerSide">
@@ -51,48 +52,33 @@ const [searchText, setSearchText] = useState("");
                     </div>
                     <div class="browseSectiondown">
                         <div class="firstRow">
-                            <div class="browserIntem">
+                            <Link class="browserIntem home-search-text" to={"/jobList?search=Web Design"}>
                                 <img src="../img/responsive.png" alt="" />
-                                <Link className='home-search-text' to={"/jobList?search=Web Design"}>
                                 <span><b >Web Design</b></span>
                                 </Link>
-                                
-                            </div>
-                            <div class="browserIntem">
+                            <Link class="browserIntem home-search-text"to={"/jobList?search=Graphic design"}> 
                                 <img src="../img/illustration.png" alt="" />
-                                <Link className='home-search-text' to={"/jobList?search=Graphic design"}> 
                                 <span><b >Graphic design</b></span>
                                 </Link>
-                            </div>
-                            <div class="browserIntem">
+                            <Link class="browserIntem home-search-text">
                                 <img src="../img/web-development.png" alt="" />
-                                <Link className='home-search-text' to={"/jobList?search=web"}>
                                 <span><b>Web Development</b></span>
                                 </Link>
-
-                            </div>
                         </div>
                         <div class="secondRow">
-                            <div class="browserIntem">
+                            <Link class="browserIntem home-search-text" to={"/jobList?search=human"}>
                                 <img src="../img/hiring.png" alt="" />
-                                <Link className='home-search-text' to={"/jobList?search=human"}>
                                 <span><b >Human Resource</b></span>
                                 </Link>
-                            </div>
 
-                            <div class="browserIntem">
+                            <Link class="browserIntem home-search-text" to={"/jobList?search=support"}>
                                 <img src="../img/technical-support.png" alt="" />
-                                <Link className='home-search-text' to={"/jobList?search=support"}>
-
                                 <span><b >Support</b></span>
                                 </Link>
-                            </div>
-                            <div class="browserIntem">
+                            <Link class="browserIntem home-search-text" to={"/jobList?search=andriod"}>
                                 <img src="../img/desktop.png" alt="" />
-                                <Link className='home-search-text' to={"/jobList?search=andriod"}>
                                 <span><b >Android Development</b></span>
-                                </Link>
-                            </div>
+                            </Link>
 
                         </div>
                     </div>
@@ -105,22 +91,22 @@ const [searchText, setSearchText] = useState("");
                             metus effci turac fr.ng.lla lorem facilrsis.</p>
                     </div>
                     <div class="middleContainerBottom">
-                        <Link href="/register">
+                        <Link to="/signUp">
                             <div class="middleContainerTopitem">
                                 <img src="../img/profile.png" alt="" />
                                 <h4>Create an Account</h4>
                             </div>
                         </Link>
-                        <Link href="">
+                        <a href="#search-bar-section">
                             <div class="middleContainerTopitem">
                                 <img src="../img/search (1).png" alt="" />
                                 <h4>Search Jobs</h4>
                             </div>
-                        </Link>
-                        <Link href="/postJob">
+                        </a>
+                        <Link to="/jobList">
                             <div class="middleContainerTopitem">
                                 <img src="../img/posting.png" alt="" />
-                                <h4>Post a job</h4>
+                                <h4>View All Jobs</h4>
                             </div>
                         </Link>
                     </div>
@@ -134,10 +120,10 @@ const [searchText, setSearchText] = useState("");
                         <a href="#">Contact</a>
                     </div>
                     <div class="social-icons">
-                        <a href=""><img src="../img/logo/004-facebook.png" alt="Facebook" /></a>
-                        <a href=""><img src="../img/logo/002-twitter.png" alt="Twitter" /></a>
-                        <a href=""><img src="../img/logo/003-linkedin.png" alt="LinkedIn" /></a>
-                        <a href=""><img src="../img/logo/001-google-plus.png" alt="Google" /></a>
+                        <a href=""><img src="../img/logo/facebook.png" alt="Facebook" /></a>
+                        <a href=""><img src="../img/logo/twitter.png" alt="Twitter" /></a>
+                        <a href=""><img src="../img/logo/linkedin.png" alt="LinkedIn" /></a>
+                        <a href=""><img src="../img/logo/social.png" alt="Google" /></a>
                     </div>
                 </div>
             </div>

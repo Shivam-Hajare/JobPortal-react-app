@@ -1,9 +1,10 @@
 import React from 'react'
+import { toast } from 'react-toastify';
 
 function AdminJobseeker({handleDeleteJobSeeker, JobSeekers}) {
 
   const handleDelete = (id) => {
-    alert( id )
+    
     handleDeleteJobSeeker(id);
   }
   return (

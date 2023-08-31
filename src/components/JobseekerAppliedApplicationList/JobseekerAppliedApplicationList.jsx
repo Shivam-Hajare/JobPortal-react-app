@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./JobseekerAppliedApplicationList.css"; // Import your CSS file for styling
+import { toast } from "react-toastify";
 
 const JobseekerAppliedApplicationList = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [filteredJobs, setFilteredJobs] = useState([]);
+  
 
   useEffect(() => {
     fetchAppliedJobs(selectedStatus);
   }, []);
 
   const fetchAppliedJobs = async () => {
-    let jobSeekerId = 1; // Get it from local storage or user context
+    let jobSeekerId = null; // Get it from local storage or user context
     const user = JSON.parse(localStorage.getItem('user'));
     if(user != null ) {
       jobSeekerId = user.jobSeekerId;
@@ -28,8 +30,11 @@ const JobseekerAppliedApplicationList = () => {
   };
 
   const fetchFilteredJobs = async (status) => {
-    alert(status);
-    const jobSeekerId = 1; // Get it from local storage or user context
+    let jobSeekerId = null; 
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user != null ) {
+      jobSeekerId = user.jobSeekerId;
+    } 
     try {
       let url = `http://localhost:8080/jobseeker/get/${status}/${jobSeekerId}`;
       const response = await axios.get(url);
@@ -40,19 +45,26 @@ const JobseekerAppliedApplicationList = () => {
     }
   };
 
-  const withdrawApplication = async (jobId) => {
-    let jobSeekerId = 1; // Get it from local storage or user context
+  const withdrawApplication =  (jobId,status) => {
+        if(status==="ACCEPTED" || status==="REJECTED")
+        {
+          toast.warning("Already Accepted or Rejected Applications can't be Withdrawn");
+          return
+        }
+    let jobSeekerId = null; // Get it from local storage or user context
     const user = JSON.parse(localStorage.getItem('user'));
     if(user != null ) {
       jobSeekerId = user.jobSeekerId;
     }
-    console.log(jobId + " => " + jobSeekerId)
     try {
-      const response = await axios.delete(
+     axios.delete(
         `http://localhost:8080/jobseeker/withdraw-application/${jobId}/${jobSeekerId}`
-      );
-      alert(response.data);
-      fetchAppliedJobs(selectedStatus); // Refresh applied jobs after withdrawal
+      ).then((response)=>{
+        toast.warning(response.data);
+        fetchAppliedJobs(selectedStatus); 
+      })
+ 
+     
     } catch (error) {
       console.error("Error withdrawing application:", error);
     }
@@ -83,24 +95,29 @@ const JobseekerAppliedApplicationList = () => {
         <p>You haven't applied for any jobs yet.</p>
       ) : (
         filteredJobs.map((job) => (
+         
           <div className="applied-job" key={job?.jobId}>
             <h3>{job?.jobTitle}</h3>
+            <div className="jobseekerAppliedApplicationList-container">
+            <div className="jobseekerAppliedApplicationList-row">
             <p>Company: {job?.companyName}</p>
             <p>Salary: {job?.salary}/year</p>
             <p>Position: {job?.jobType}</p>
+            </div>
+            <div className="jobseekerAppliedApplicationList-row">
             <p>Posted: {job.postedDate}</p>
-            <p>Status: {job?.status.toLowerCase()}</p>
-            <p>JobId: {job?.jobId}</p>
-            {  job?.status !== "withdrawn" && (
-              <button
+            <p>Status: {job?.status}</p>
+            </div>
+            </div>
+            
+             { (job.status === "ACCEPTED" || job.status === "REJECTED" ) ?  null :   <button
                 className="withdraw-button"
-                onClick={() => withdrawApplication(job?.jobId)}
-                disabled={job?.status === "ACCEPTED" || job?.status === "REJECTED"} 
-     
+                onClick={() => withdrawApplication(job?.jobId,job.status)}
+                // disabled={job?.status === "ACCEPTED" || job?.status === "REJECTED"} 
               >
                 Withdrawn Application
-              </button>
-            )}
+              </button>}
+            
           </div>
         ))
       )}

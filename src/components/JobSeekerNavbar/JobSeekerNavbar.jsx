@@ -22,7 +22,7 @@ function JobSeekerNavbar({ onSignout }) {
   return (
     <div>
          <nav className="navBar">
-             <img className="logo" srcSet="../img/Screenshot (70).png" alt="logo" />
+             <img className="logo" src="../img/Screenshot (70).png" alt="logo" />
              <ul className="navList">
 
              <li className={`navItems ${location.pathname === '/' ? 'active' : ''}`}>
@@ -33,15 +33,15 @@ function JobSeekerNavbar({ onSignout }) {
                     <Link to="/jobList">Jobs</Link>
                 </li>
 
-                 <li className={`navItems ${location.pathname === '/jobseekerUpdateProfile' ? 'active' : ''}`}>
-                  <Link to="/jobseekerUpdateProfile">update jobseeker profile</Link>
+                 <li className={`navItems ${location.pathname === '/myJobs' ? 'active' : ''}`}>
+                  <Link to="/myJobs">MyJobs</Link>
                   </li>  {/* profile name*/} 
 
                  <button className='signout_btn navItems' onClick={signoutHandler}>
             <Link className='signout_btn navItems' to="/">Signout</Link>
           </button>
                 <li className={`navItems ${location.pathname === '/jobseekerProfile' ? 'active' : ''}`}>
-                  <Link to="/jobseekerProfile">Profile</Link></li>
+                  <Link to="/jobseekerProfile"><img className='profileImg' src="../img/profile.png" alt="" /></Link></li>
         </ul>
         </nav>
     </div>

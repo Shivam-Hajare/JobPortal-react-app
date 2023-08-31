@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Admin.css";
 import AdminJobseeker from '../AdminJobseekerList/AdminJobseeker';
+import { toast } from 'react-toastify';
 
 const AdminController = () => {
   const [recruiters, setRecruiters] = useState([]);
   const [showRecruiters, setShowRecruiters] = useState(false);
-
+  const [isActive, setIsActive] = useState(false);
   const [JobSeekers, setJobseekers] = useState([]);
   const [showJobseekers, setShowJobseekers] = useState(false);
 
@@ -22,6 +23,7 @@ const AdminController = () => {
   };
 
   const handleRecruiterClick = () => {
+    setIsActive(false);
     fetchRecruiters();
     setShowRecruiters(true);
   };
@@ -30,6 +32,7 @@ const AdminController = () => {
     axios.delete(`http://localhost:8080/admin/remove-recruiter-profile/${recruiterId}`)
       .then(() => {
         fetchRecruiters(); // Refresh the list after deletion
+        toast.success("Recruiter deleted Successfully!!")
       })
       .catch(error => {
         console.error('Error deleting recruiter:', error);
@@ -49,18 +52,21 @@ const AdminController = () => {
 
   const handleJobSeekerClick = () => {
     fetchJobSeekers();
+    setIsActive(true);
    // alert("jobseeker show")
     setShowRecruiters(false);
   };
 
   const handleDeleteJobSeeker = (jobSeekerId) => {
-    alert("delet wit id " + jobSeekerId)
+    //alert("delet wit id " + jobSeekerId)
     axios.delete(`http://localhost:8080/admin/remove-jobseeker-profile/${jobSeekerId}`)
       .then(() => {
         fetchJobSeekers(); // Refresh the list after deletion
+        toast.success("JobSeeker deleted Successfully!!")
       })
       .catch(error => {
-        console.error('Error deleting job seeker:', error);
+       // console.error('Error deleting job seeker:', error);
+        toast.error('Error deleting job seeker:', error)
       });
   };
 
@@ -75,13 +81,17 @@ const AdminController = () => {
       </div>
 
       <div className="optionsAdmin">
+        <div className={`${isActive ? "border-bottom" : "none"}`}>
           <button className="optionAdmin" onClick={handleJobSeekerClick}>
           JobSeeker
           </button>
+        </div>
 
+         <div className={`${!isActive ? "border-bottom": "none"}`}>
           <button className="optionAdmin" onClick={handleRecruiterClick}>
             Recruiter
             </button>
+         </div>
             
       </div>
       

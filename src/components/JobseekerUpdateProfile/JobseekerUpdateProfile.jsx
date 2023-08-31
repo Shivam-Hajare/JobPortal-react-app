@@ -5,6 +5,7 @@ import UpdateSkills from "./UpdateSkills/UpdateSkills";
 import EducationDetailsUpdate from "./EducationDetailsUpdate/EducationDetailsUpdate";
 import "./EducationDetailsUpdate/EducationDetailsUpdate.css";
 import ResumeUploader from "../ResumeUploader/ResumeUploader";
+import { toast } from 'react-toastify';
 
 function JobseekerUpdateProfile() {
   const [id, setId] = useState(0);
@@ -48,6 +49,8 @@ function JobseekerUpdateProfile() {
     percentage: 0,
   };
 
+  const [educationalDetails, setEducationalDetails] = useState([initialDetail]);
+  
   // function convertDateFormat(date) {
   //   console.log(date);
   //   const [day, month, year] = date.split('-');
@@ -56,9 +59,6 @@ function JobseekerUpdateProfile() {
   // }
 
 
-  const [educationalDetails, setEducationalDetails] = useState([initialDetail]);
-
-  // for update skill component
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState({});
 
@@ -78,13 +78,13 @@ function JobseekerUpdateProfile() {
       );
       setProfile(response.data);
     } catch (error) {
-      // Handle profile not found error
+
       console.error("Error fetching profile:", error);
     }
   };
 
   const updateSkills = () => {
-    // set skills and educational details
+
     setProfile((prevProfile) => ({
       ...prevProfile,
       skills: selectedSkills,
@@ -103,7 +103,7 @@ function JobseekerUpdateProfile() {
       ...prevProfile,
       [field]: value,
     }));
-    // Clear validation error when user starts typing
+
     setValidationErrors((prevErrors) => ({
       ...prevErrors,
       [field]: "",
@@ -111,7 +111,7 @@ function JobseekerUpdateProfile() {
   };
 
   const updateProfile = async () => {
-    // Validation
+
     let errors = {};
     if (!profile.email || profile.email.trim() === "")
       errors.email = "Email is required.";
@@ -119,7 +119,7 @@ function JobseekerUpdateProfile() {
       errors.firstName = "First Name is required.";
     if (!profile.lastName || profile.lastName.trim() === "")
       errors.lastName = "Last Name is required.";
-    if (!profile.yearOfExperience || profile.yearOfExperience == "")
+    if (profile.yearOfExperience !=0 && (!profile.yearOfExperience || profile.yearOfExperience == ""))
       errors.yearOfExperience = "Years of Experience is required.";
 
     if (Object.keys(errors).length > 0) {
@@ -129,31 +129,26 @@ function JobseekerUpdateProfile() {
 
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      let jobseekerId = null; // tesing only
+      let jobseekerId = null; 
       if (user != null) {
         jobseekerId = user.jobSeekerId;
       }
 
-     console.log(jobseekerId)
-     console.log(profile);
        const response = await axios.put(
          `http://localhost:8080/jobseeker/update-profile/${jobseekerId}`,
          profile
        );
-     
+     toast.success(response.data);
     } catch (error) {
       if(error.response.data.hasOwnProperty("yearOfExperience")) {
-        alert( error.response.data.yearOfExperience);
+        toast.error( error.response.data.yearOfExperience);
         return;
       }
    
       if(error.response.hasOwnProperty("data")) {
-        alert(error.response.data);
-        // return;
+        toast.error(error.response.data);
       }
-      alert("this is working");
     }
-
     await fetchProfile();
   };
 

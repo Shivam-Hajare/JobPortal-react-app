@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
-import validateForm from "../../utils/jobseekerSignUpValidation";
+import { validateFormHr } from "../../utils/jobseekerSignUpValidation";
 
 const RecruiterSignUp = () => {
   const navigate = useNavigate();
@@ -59,20 +60,17 @@ const RecruiterSignUp = () => {
 
     let isValid = true;
     let newErrors = {};
-    let errorObject = validateForm({
+    let errorObject = validateFormHr({
       email: formData.email,
       firstName: formData.firstName,
       lastName: formData.lastName,
+      password: formData.password
     });
     isValid = errorObject.isValid;
     newErrors = errorObject.newErrors;
 
     setErrors(newErrors);
-    console.log(" valid form " + isValid)
     if (isValid) {
-      alert("Form submitted successfully!");
-      navigate("/signin");
-
       try {
         const response = await axios.post(
           "http://localhost:8080/signup/newRegistration",
@@ -89,13 +87,21 @@ const RecruiterSignUp = () => {
         );
 
         if (response.status === 200) {
-          alert("Successful signup");
+         navigate("/signin");
+          toast.success("Register successfully")
         }
       } catch (error) {
-        alert("Wrong credentials");
+
+        toast.error(error.response.data)
       }
     }else {
-      console.log("invlid ");
+     const erroKeys = ["firstName", "lastName", "password","email"]; 
+     for (const key of erroKeys) {
+        if (errorObject.newErrors.hasOwnProperty(key)) {
+          toast.error(` ${errorObject.newErrors[key]}`);
+          break; 
+        }
+  }
     }
   };
 

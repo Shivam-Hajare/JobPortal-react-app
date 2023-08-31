@@ -9,7 +9,7 @@
     margin: auto;
 }
 .logo{
-    width: 60px;
+    width: 90px;
 }
 .navList{
     display: flex;
@@ -17,6 +17,7 @@
     list-style: none ;
     margin: 20px;
 
+    align-items: center;
 }
  .navItems a{
     font-size: large;
@@ -32,8 +33,10 @@
     color: black;
     border: none;
 }
-.navItems.active {
-    text-decoration: underline;
-    text-decoration-color: red;
-    /* Add any other styling you want for the active item */
+.profileImg{
+    width:40px !important;
 }
+/* .navItems.active {
+    text-decoration: underline;
+    border-bottom: solid rgb(3, 87, 9);
+} */

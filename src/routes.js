@@ -14,6 +14,7 @@ import JobseekerUpdateProfile from './components/JobseekerUpdateProfile/Jobseeke
 import RecruiterProfile from './components/RecruiterProfile/RecruiterProfile';
 import EditRecruiterProfile from './components/EditRecruiterProfile/EditRecruiterProfile';
 import AdminController from './components/AdminController/AdminController';
+import JobseekerAppliedApplicationList from "./components/JobseekerAppliedApplicationList/JobseekerAppliedApplicationList";
 const appRouter = createBrowserRouter([
     {
         path: "/",
@@ -62,6 +63,10 @@ const appRouter = createBrowserRouter([
                 element: <JobseekerUpdateProfile />
             },
             {
+                path: "/myJobs",
+                element: <JobseekerAppliedApplicationList />
+            },
+            {
                 path: "/RecruiterProfile",
                 element: <RecruiterProfile />
             },
@@ -72,13 +77,8 @@ const appRouter = createBrowserRouter([
             {
                 path: "/AdminController",
                 element: <AdminController />
-            },
+            }
         ]
-    },
-    {
-        path: "/jobseeker",
-        element: <App />,
-        errorElement: <ErrorComponent />,
     }
 ])
 export default appRouter;

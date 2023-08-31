@@ -10,6 +10,7 @@
   .optionsAdmin {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 1rem 0;
   }
   
@@ -21,8 +22,18 @@
     margin: 0 0.5rem;
     border-radius: 5px;
     transition: background-color 0.2s ease;
+   
   }
-  
+
+  .border-bottom {
+    padding: 0.4rem 0;
+    border-width: 0 0 2px;
+    border-color: red;
+    border-style: solid;
+  }
+  .optionAdmin:active {
+    background-color: rgb(33, 33, 159);
+  }
   .optionAdmin:hover {
     background-color: #ddd;
   }

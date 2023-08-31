@@ -26,9 +26,9 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
   const handleInputChange = (index, field, value) => {
     const updatedDetails = [...educationalDetails];
   if (field === 'admissionDate' || field === 'completionDate') {
-    updatedDetails[index][field] = value.trim(); // Convert date format for backend
+    updatedDetails[index][field] = value; // Convert date format for backend
   } else {
-    updatedDetails[index][field] = value.trim();
+    updatedDetails[index][field] = value;
   }
   setEducationalDetails(updatedDetails);
   };
@@ -59,19 +59,19 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
             placeholder="Qualification"
             value={detail?.qualification}
             onChange={(e) => handleInputChange(index, 'qualification', e.target.value)}
-            required
+            // required
           />
           <input
             type="text"
             placeholder="Institute"
             value={detail?.institute}
             onChange={(e) => handleInputChange(index, 'institute', e.target.value)}
-            required
+            // required
           />
           <input
       type="date"
       placeholder="Admission Date"
-      value={detail?.admissionDate} // Convert date format for frontend display
+      value={detail?.admissionDate} 
       onChange={(e) => handleInputChange(index, 'admissionDate', e.target.value)}
       required
       style={{ appearance: 'textfield' }}
@@ -79,7 +79,7 @@ const EducationDetailsUpdate = ({ jobseekerEducation, educationalDetails, setEdu
           <input
       type="date"
       placeholder="Admission Date"
-      value={detail?.completionDate} // Convert date format for frontend display
+      value={detail?.completionDate} 
       onChange={(e) => handleInputChange(index, 'completionDate', e.target.value)}
       required
     />

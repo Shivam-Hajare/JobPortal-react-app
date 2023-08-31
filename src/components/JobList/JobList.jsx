@@ -5,6 +5,8 @@ import SearchBar from "../SearchBar/SearchBar";
 import searchFunction from "../../utils/searchFunction";
 import { useLocation } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+
 const JobList = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -55,9 +57,6 @@ const JobList = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   handleSearch({filterType: "text", filterValue: searchText})
-  // }, [searchText]);
 
   const fetchJobs = async () => {
     try {
@@ -71,17 +70,24 @@ const JobList = () => {
     }
   };
 
-  const applyForJob = async (jobId) => {
-    // http://localhost:8080/jobseeker/apply/jobId/jobSeekerId
-    const jobSeekerId = 1; 
+  const applyForJob =  (jobId) => {
+    let jobSeekerId = null; // Get it from local storage or user context
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user != null) {
+      jobSeekerId = user.jobSeekerId;
+    }
+    // alert(jobSeekerId + " " + jobId)
     try {
-      const response = await axios.get(
+       axios.get(
         `http://localhost:8080/jobseeker/apply/${jobId}/${jobSeekerId}`
-      );
-      alert(response.data);
+      )
+      .then((response)=> {
+        toast.success(response.data);
+      })
     } catch (error) {
       console.error("Error fetching jobseeker/apply/jobId/jobSeekerId", error);
     }
+
   };
 
   const handleSearch = async (filters) => {

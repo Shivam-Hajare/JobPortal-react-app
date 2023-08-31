@@ -32,8 +32,8 @@
     color: black;
     border: none;
 }
-.navItems.active {
+
+/* .navItems.active {
     text-decoration: underline;
-    text-decoration-color: red;
-    /* Add any other styling you want for the active item */
-}
+    border-bottom: solid rgb(3, 87, 9);
+} */

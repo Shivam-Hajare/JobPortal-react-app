@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ResumeUploader.css"; // Import your CSS file
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const ResumeUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -27,7 +28,8 @@ const ResumeUploader = () => {
     axios
       .delete(url)
       .then((response) => {
-        alert(response.data);
+       // alert(response.data);
+        toast.warning(response.data)
       })
       .catch((error) => {
         alert("There was a problem with the GET request:", error);
@@ -54,7 +56,6 @@ const ResumeUploader = () => {
   // };
 
   const uploadResume = async () => {
-    console.log("upload resume 1")
     if (selectedFile) {
       try {
         const fileArrayBuffer = await selectedFile.arrayBuffer(); // Convert File to ArrayBuffer
@@ -68,13 +69,16 @@ const ResumeUploader = () => {
           }
         });
   
-        alert("resume updated succefully");
+        //alert("resume updated succefully");
+        toast.success("Resume Updated Succefully")
         setSelectedFile(null);
       } catch (error) {
-        alert("There was a problem with the POST request:", error);
+        //alert("There was a problem with the POST request:", error);
+        toast.error("Something went wrong!!")
       }
     } else {
-      console.log("No file selected.");
+     // console.log("No file selected.");
+      toast.warning("No file selected!!")
     }
 
     setSelectedFile(null);

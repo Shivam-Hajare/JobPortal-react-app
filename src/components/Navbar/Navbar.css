@@ -9,7 +9,7 @@
     margin: auto;
 }
 .logo{
-    width: 60px;
+    width: 90px;
 }
 .navList{
     display: flex;
@@ -27,7 +27,7 @@
     border-bottom: solid rgb(3, 87, 9);
 }
 .navItems.active {
-    text-decoration: underline;
-    text-decoration-color: red;
+    /* text-decoration: underline; */
+    border-bottom: solid rgb(3, 87, 9);
     /* Add any other styling you want for the active item */
 }

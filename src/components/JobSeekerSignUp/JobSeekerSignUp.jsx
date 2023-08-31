@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './JobSeekersSignUp.css';
 import { useNavigate } from 'react-router-dom';
-import validateForm from '../../utils/jobseekerSignUpValidation';
+import { validateForm } from '../../utils/jobseekerSignUpValidation';
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function JobSeekerSignUp() {
     const [formData, setFormData] = useState({
@@ -85,11 +86,12 @@ function JobSeekerSignUp() {
                 `http://localhost:8080/signup/jobseeker/newRegistration`,
                 formData
                 );
+                toast.success('Registrated successfully!');
                 console.log(response); 
             }catch(error) {
-                console.log(error);
+                toast.error(error.response.data)
             }
-            alert('Form submitted successfully!');
+            
     }
     
 
@@ -141,7 +143,7 @@ function JobSeekerSignUp() {
                 <div>
                     <label>Password</label>
                     <input
-                        type="text"
+                        type="password"
                         name="password"
                         value={formData?.password}
                         onChange={handleInputChange}
